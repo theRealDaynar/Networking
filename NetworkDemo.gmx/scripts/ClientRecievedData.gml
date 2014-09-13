@@ -166,16 +166,20 @@
                 var serverInst = buffer_read(buff, buffer_s32)
                 ds_list_add(global.ServerInstances,serverInst)
                 ds_list_add(global.ClientInstances,synco)
-                synco.client=true
-                if synco.image_index=2
+                with(synco)
                 {
-                        synco.gun=sniper
-                        synco.laser_sight=true
+                    client=true
+                    if image_index=2
+                    {
+                            InitSniper()
+                    }
+                    else if image_index=3
+                            InitBulletThrower()
+                    else if image_index>3
+                            InitShoto()
+                    else
+                            InitGatgat()
                 }
-                else if synco.image_index=3
-                        synco.gun=bulletthrower
-                else if synco.image_index>3
-                        synco.gun=shotgun
                 /*file_text_write_string(textfile,"Object type: " + string(o) )
                 file_text_writeln(textfile)
                 file_text_write_string(textfile,"X: " + string(ox) )

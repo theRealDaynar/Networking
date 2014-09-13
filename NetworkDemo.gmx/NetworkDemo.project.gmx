@@ -50,10 +50,14 @@
     <script>scripts\GetCollision.gml</script>
     <script>scripts\AddVKey.gml</script>
     <scripts name="Guns">
-      <script>scripts\FireShoto.gml</script>
-      <script>scripts\FireSniper.gml</script>
-      <script>scripts\FireGatgat.gml</script>
-      <script>scripts\FireBulletThrower.gml</script>
+      <scripts name="Init">
+        <script>scripts\InitGatgat.gml</script>
+        <script>scripts\InitShoto.gml</script>
+        <script>scripts\InitBulletThrower.gml</script>
+        <script>scripts\InitSniper.gml</script>
+      </scripts>
+      <script>scripts\FireGun.gml</script>
+      <script>scripts\DrawLaserSight.gml</script>
     </scripts>
     <scripts name="Networking">
       <script>scripts\ConnectDisconnectClient.gml</script>
@@ -112,7 +116,7 @@
     <constant name="GUN_ANGLE_CMD">7</constant>
     <constant name="ADD_BULLET">8</constant>
     <constant name="GM_version">'1.0.0.1'</constant>
-    <constant name="GM_build_date">41895.1970894792</constant>
+    <constant name="GM_build_date">41895.883360463</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

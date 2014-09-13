@@ -44,20 +44,24 @@ dir=0;
 client=false
 
 //gun setup 
-gun=gatgat
-aimAngle=0
-aimX=x
-aimY=y
-inaccuracyArc=10
-bulletNum=4
-bulletString=5
-bulletStringN=0
-bulletArc=50
-bulletSpd=5
-rof=3/room_speed
-rofcd=0
-fire_gun=FireGatgat
-laser_sight=false
+gun=gatgat          //sprite
+aimAngle=0          //angle gun points at
+aimX=x              //client mouse x
+aimY=y              //client mouse y
+inaccuracyArc=0     //level of inaccurancy +- in degrees
+bulletNum=0         //number of bullets to fire at once
+bulletString=0      //number of bullets in a string
+bulletStringN=0     //counter variable for bulletString
+bulletStringCD=0    //frames between each bullet in the string
+bulletArc=0         //Arc in which to spread bullets in bulletNum
+bulletSpd=5         //bullet speed
+rof=0               //cooldown timer
+rofcd=0             //actual ticker for cooldown timer
+laser_sight=false   //display lazer sight
+disableInput=false  //does shooting diable input
+shooting=false      //Is it shooting
+chargeUpTime=0      //time required before any shots can be fired
+chargeUp=0          //ticker for chargeUpTime
 
 
 hp = 10
@@ -188,7 +192,7 @@ if( keys[LEFT_KEY] )
 if client=false{
     if keys[MB_LEFT]=true and rofcd&lt;=0
     {
-        script_execute(fire_gun)
+        FireGun()
     }
     else if rofcd&gt;0
     {
@@ -250,39 +254,7 @@ if client=false{
         draw_sprite_ext(gun,0,x,y+23,-1,1,aimAngle,c_white,1)
     if laser_sight=true
     {
-            //27,1
-            //9,8
-        var tx =27-9
-        var ty =1-8
-        var tangle = radtodeg(arctan2(ty, tx))
-        var th = sqrt(tx*tx+ty*ty)
-        
-        if image_xscale = 1
-        {
-            var lx = lengthdir_x(th,-tangle+aimAngle)
-            var ly = lengthdir_y(th,-tangle+aimAngle)
-            var desx = x-1+lx
-            var desy = y+22+ly
-            while(GetCollision(desx,desy)&lt;0 and (!collision_point(desx,desy,oPlayer,false,true) or collision_point(desx,desy,oPlayer,false,true).client=false))
-            {
-                desx += cos(-degtorad(aimAngle))
-                desy += sin(-degtorad(aimAngle))
-            }
-        }
-        else
-        {
-            var lx = lengthdir_x(th,tangle+aimAngle+180)
-            var ly = lengthdir_y(th,tangle+aimAngle+180)
-            var desx = x-1+lx
-            var desy = y+22+ly
-            while(GetCollision(desx,desy)&lt;0 and (!collision_point(desx,desy,oPlayer,false,true) or collision_point(desx,desy,oPlayer,false,true).client=false))
-            {
-                desx += cos(-degtorad(aimAngle+180))
-                desy += sin(-degtorad(aimAngle+180))
-            }
-        }
-        if GetCollision(x+1+lx,y+22+ly)&lt;0
-            draw_line_colour(x-1 + lx,y+22 + ly,desx,desy,c_red,c_red)
+        DrawLaserSight()
     }
 }
 /*else

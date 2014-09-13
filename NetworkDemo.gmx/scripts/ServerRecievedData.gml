@@ -130,11 +130,13 @@
     with(inst)
         {
             if image_index=2
-                fire_gun=FireSniper
-            else if  image_index=3
-                fire_gun=FireBulletThrower
+                InitSniper()
+            else if image_index=3
+                InitBulletThrower()
             else if image_index>3
-                fire_gun=FireShoto
+                InitShoto()
+            else
+                InitGatgat()
             global.pBuffer = buffer_create(1, buffer_grow, 1)
             buffer_write(global.pBuffer, buffer_s16, SYNC_CMD);
             buffer_write(global.pBuffer, buffer_u32, 1);
