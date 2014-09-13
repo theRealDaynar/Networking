@@ -168,7 +168,10 @@
                 ds_list_add(global.ClientInstances,synco)
                 synco.client=true
                 if synco.image_index=2
+                {
                         synco.gun=sniper
+                        synco.laser_sight=true
+                }
                 else if synco.image_index=3
                         synco.gun=bulletthrower
                 else if synco.image_index>3

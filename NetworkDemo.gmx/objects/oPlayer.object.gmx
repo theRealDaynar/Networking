@@ -57,7 +57,7 @@ bulletSpd=5
 rof=3/room_speed
 rofcd=0
 fire_gun=FireGatgat
-laser_sight=true
+laser_sight=false
 
 
 hp = 10
