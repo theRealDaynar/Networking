@@ -263,31 +263,10 @@ if client=false{
             var ly = lengthdir_y(th,-tangle+aimAngle)
             var desx = x-1+lx
             var desy = y+22+ly
-            var ttx = 0
-            var tty = 0
-            var brake = false
-            while(GetCollision(desx,desy)&lt;0 and brake=false)
+            while(GetCollision(desx,desy)&lt;0 and (!collision_point(desx,desy,oPlayer,false,true) or collision_point(desx,desy,oPlayer,false,true).client=false))
             {
-                ttx = lengthdir_x(32, aimAngle)
-                tty = lengthdir_y(32, aimAngle)
-                desx+=ttx
-                if GetCollision(desx,desy)&gt;-1 and GetCollision(desx-ttx,desy+tty)&lt;0
-                    {
-                        if ttx&gt;0
-                            desx=(desx&amp;$ffffffe0)
-                        else
-                            desx=(desx&amp;$ffffffe0)+32
-                        brake=true
-                    }
-                desy+=tty
-                if GetCollision(desx,desy)&gt;-1 and GetCollision(desx,desy-tty)&lt;0
-                    {
-                        if tty&gt;0
-                            desy=(desy&amp;$ffffffe0)
-                        else
-                            desy=(desy&amp;$ffffffe0)+32
-                        brake=true
-                    }
+                desx += cos(-degtorad(aimAngle))
+                desy += sin(-degtorad(aimAngle))
             }
         }
         else
@@ -296,43 +275,10 @@ if client=false{
             var ly = lengthdir_y(th,tangle+aimAngle+180)
             var desx = x-1+lx
             var desy = y+22+ly
-            var ttx =0
-            var tty =0
-            var brake = false
-            while(GetCollision(desx,desy)&lt;0 and brake=false)
+            while(GetCollision(desx,desy)&lt;0 and (!collision_point(desx,desy,oPlayer,false,true) or collision_point(desx,desy,oPlayer,false,true).client=false))
             {
-                ttx = lengthdir_x(32, aimAngle+180)
-                tty = lengthdir_y(32, aimAngle+180)
-                desx+=ttx
-                if GetCollision(desx,desy)&gt;-1 and GetCollision(desx-ttx,desy+tty)&lt;0
-                    {
-                        if ttx&gt;0
-                            desx=(desx&amp;$ffffffe0)
-                        else
-                            desx=(desx&amp;$ffffffe0)+32
-                        brake=true
-                    }
-                desy+=tty
-                if GetCollision(desx,desy)&gt;-1 and GetCollision(desx,desy-tty)&lt;0
-                    {
-                        if tty&gt;0
-                            desy=(desy&amp;$ffffffe0)
-                        else
-                            desy=(desy&amp;$ffffffe0)+32
-                        brake=true
-                    }
-                if GetCollision(desx,desy)&gt;-1 and brake=false
-                    {
-                        if tty&gt;0
-                            desy=(desy&amp;$ffffffe0)
-                        else
-                            desy=(desy&amp;$ffffffe0)+32
-                        if ttx&gt;0
-                            desx=(desx&amp;$ffffffe0)
-                        else
-                            desx=(desx&amp;$ffffffe0)+32
-                        brake=true
-                    }
+                desx += cos(-degtorad(aimAngle+180))
+                desy += sin(-degtorad(aimAngle+180))
             }
         }
         if GetCollision(x+1+lx,y+22+ly)&lt;0
