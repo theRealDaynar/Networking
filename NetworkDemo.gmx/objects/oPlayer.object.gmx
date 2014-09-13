@@ -43,7 +43,7 @@ jump=false;
 dir=0;   
 client=false
 
-//gun settup 
+//gun setup 
 gun=gatgat
 aimAngle=0
 aimX=x
@@ -57,6 +57,8 @@ bulletSpd=5
 rof=3/room_speed
 rofcd=0
 fire_gun=FireGatgat
+laser_sight=true
+
 
 hp = 10
 </string>
@@ -246,9 +248,13 @@ if client=false{
         draw_sprite_ext(gun,0,x,y+23,1,1,aimAngle,c_white,1)
     else
         draw_sprite_ext(gun,0,x,y+23,-1,1,aimAngle,c_white,1)
+       tx=lengthdir_x (1000,aimAngle)+y+23
+       ty=lengthdir_y (1000,aimAngle)+y+23
+         draw_line_width_color(x,y+23,tx,ty,1,c_red,c_red)
 }
 /*else
 draw_rectangle_color(bbox_left,bbox_top,bbox_right,bbox_bottom,c_red,c_red,c_red,c_red,true)
+
 </string>
           </argument>
         </arguments>
