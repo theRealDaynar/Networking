@@ -198,6 +198,9 @@ if(( keys[LEFT_KEY] ) and disableInput=false) or (shooting=false and keys[LEFT_K
     {
         rofcd--
     }
+    else if keys[MB_LEFT]=false
+        chargeUp = 0
+    
     if xprevious!=x or yprevious!=y
     {
         if client=false or oClient.ClientPlayer=id
