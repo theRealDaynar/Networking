@@ -99,6 +99,7 @@
   <rooms name="rooms">
     <room>rooms\Menu</room>
     <room>rooms\Level1</room>
+    <room>rooms\Level2</room>
   </rooms>
   <constants number="16">
     <constant name="NETWORK_LOGIN">0</constant>
@@ -116,7 +117,7 @@
     <constant name="GUN_ANGLE_CMD">7</constant>
     <constant name="ADD_BULLET">8</constant>
     <constant name="GM_version">'1.0.0.1'</constant>
-    <constant name="GM_build_date">41895.883360463</constant>
+    <constant name="GM_build_date">41896.1227719676</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
