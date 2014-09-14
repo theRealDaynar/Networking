@@ -36,6 +36,7 @@
       <sprite>sprites\Bullet</sprite>
       <sprite>sprites\Grenade</sprite>
     </sprites>
+    <sprite>sprites\sprite22</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background2</background>
@@ -117,7 +118,7 @@
     <constant name="GUN_ANGLE_CMD">7</constant>
     <constant name="ADD_BULLET">8</constant>
     <constant name="GM_version">'1.0.0.1'</constant>
-    <constant name="GM_build_date">41896.1672192361</constant>
+    <constant name="GM_build_date">41896.3214534375</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
