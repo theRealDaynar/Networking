@@ -6,19 +6,24 @@ if chargeUpTime<=chargeUp
     {
         var inacArc = random(inaccuracyArc * 2) - inaccuracyArc;
         var aimMode = 0
+        if client=false
+            var o = oServerProjectile
+        else
+            var o = oClientProjectile
         if image_xscale=1
         {
-            var instProj = instance_create(x + lengthdir_x(24.1868, aimAngle+7.12502),y + 23 + lengthdir_y(24.1868, aimAngle+7.12502),oServerProjectile);
+            var instProj = instance_create(x + lengthdir_x(24.1868, aimAngle+7.12502),y + 23 + lengthdir_y(24.1868, aimAngle+7.12502),o);
         }
         else
         {
-            var instProj = instance_create(x - lengthdir_x(24.1868, aimAngle-7.12502),y + 23 - lengthdir_y(24.1868, aimAngle-7.12502),oServerProjectile);
+            var instProj = instance_create(x - lengthdir_x(24.1868, aimAngle-7.12502),y + 23 - lengthdir_y(24.1868, aimAngle-7.12502),o);
             aimMode=180
         }
         instProj.speed = bulletSpd
         instProj.direction = aimAngle + inacArc + aimMode + spreadDir
+        instProj.image_angle = aimAngle + inacArc + aimMode + spreadDir
         instProj.owner = id
-        SendBullet(instProj)
+        //SendBullet(instProj)
         spreadDir -= bulletArc/bulletNum   
     }
     if bulletStringN<bulletString

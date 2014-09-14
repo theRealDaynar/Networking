@@ -48,7 +48,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with(oServer)
+            <string>/*with(oServer)
 {
     global.pBuffer = buffer_create(1, buffer_grow, 1)
     buffer_write(global.pBuffer, buffer_s16, PLAYERDC_CMD);

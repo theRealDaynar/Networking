@@ -32,6 +32,7 @@ clientx = 64;   // player start X and Y
 clienty = 192;
 PlayerName=global.ServerName;   // get the name that was selected (it's a server OR player name)
 PlayerChar=global.s
+ClientPlayer=id
 
 // Create a buffer for the network messages
 buff = buffer_create(256, buffer_grow, 1);
@@ -112,6 +113,15 @@ alarm[0]=120;
             <kind>1</kind>
             <string>if oMX!=mouse_x or oMY!=mouse_y
 {
+    with(ClientPlayer)
+    {
+        aimX=mouse_x
+        aimY=mouse_y
+        if image_xscale=-1
+            aimAngle=point_direction(aimX,aimY,x,y+23);
+        else
+            aimAngle=point_direction(x,y+23,aimX,aimY);
+    }
     var mBuffer = buffer_create(1, buffer_grow, 1)
     buffer_write(mBuffer, buffer_s16, GUN_ANGLE_CMD );
     buffer_write(mBuffer, buffer_s16, mouse_x );
