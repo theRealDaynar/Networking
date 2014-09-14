@@ -32,6 +32,7 @@ clientx = 64;   // player start X and Y
 clienty = 192;
 PlayerName=global.ServerName;   // get the name that was selected (it's a server OR player name)
 PlayerChar=global.s
+PlayerControlledUnit=id
 
 // Create a buffer for the network messages
 buff = buffer_create(256, buffer_grow, 1);
