@@ -117,7 +117,7 @@
     <constant name="GUN_ANGLE_CMD">7</constant>
     <constant name="ADD_BULLET">8</constant>
     <constant name="GM_version">'1.0.0.1'</constant>
-    <constant name="GM_build_date">41896.123608912</constant>
+    <constant name="GM_build_date">41896.1854106019</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
