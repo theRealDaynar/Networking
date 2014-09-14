@@ -62,7 +62,7 @@ disableInput=false  //does shooting diable input
 shooting=false      //Is it shooting
 chargeUpTime=0      //time required before any shots can be fired
 chargeUp=0          //ticker for chargeUpTime
-knockback=0         //kickback from gun shot
+
 
 hp = 10
 </string>
@@ -189,7 +189,7 @@ if( keys[LEFT_KEY] )
     // If standing still, don't animate
     //image_xscale = 1;
 }
-//if client=false{
+if client=false{
     if keys[MB_LEFT]=true and rofcd&lt;=0
     {
         FireGun()
@@ -204,7 +204,6 @@ if( keys[LEFT_KEY] )
         aimAngle=point_direction(aimX,aimY,x,y+23);
         else
         aimAngle=point_direction(x,y+23,aimX,aimY);
-        if client=false
         with(oServer)
         {
             var mBuffer = buffer_create(1, buffer_grow, 1)
@@ -221,7 +220,7 @@ if( keys[LEFT_KEY] )
             }
             buffer_delete(mBuffer)
         }
-//    }
+    }
 }
 
 </string>

@@ -22,7 +22,7 @@
         //inst.image_index = floor(random(sprite_get_number(sCharacters)))
         inst.image_blend = ColourArray[colourindex];
         colourindex = (colourindex+1) & 15;
-        
+
         // put this instance into a map, using the socket ID as the lookup
         ds_map_add( Clients, sock, inst );
         
