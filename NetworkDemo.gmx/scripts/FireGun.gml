@@ -24,7 +24,9 @@ if chargeUpTime<=chargeUp
         instProj.image_angle = aimAngle + inacArc + aimMode + spreadDir
         instProj.owner = id
         //SendBullet(instProj)
-        spreadDir -= bulletArc/bulletNum   
+        spreadDir -= bulletArc/bulletNum
+        recoilSpeed = recoil
+        recoilDirection = -aimAngle + aimMode
     }
     if bulletStringN<bulletString
     {

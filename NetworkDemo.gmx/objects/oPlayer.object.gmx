@@ -39,7 +39,8 @@ for(var i=0;i&lt;4;i++){
 // basic movement setup
 xspeed = 2;
 grav=2;
-jump=false;
+jump=0;
+jumpPressed=false;
 dir=0;   
 client=false
 
@@ -62,6 +63,9 @@ disableInput=false  //does shooting diable input
 shooting=false      //Is it shooting
 chargeUpTime=0      //time required before any shots can be fired
 chargeUp=0          //ticker for chargeUpTime
+recoil=0            //recoil amount STATIC defined by gun
+recoilSpeed=0       //recoil speed used to actually move the player
+recoilDirection=0   //direction recoiled
 
 
 hp = 10
@@ -89,14 +93,120 @@ hp = 10
             <kind>1</kind>
             <string> /// Process the player (move+collision)
 var xx,yy,c1,c2;
-
-/// Do payer "jump"
-if( !jump ) 
+if recoilSpeed&gt;0
 {
-    if(( keys[JUMP_KEY] ) and disableInput=false) or (shooting=false and keys[JUMP_KEY]){
-        grav=-8;
-        jump=true;
+    var hspd = lengthdir_x(recoilSpeed,recoilDirection)
+        if hspd&lt;0
+        {
+            while(hspd&lt;0)
+            {
+                if hspd&gt;-1
+                {
+                    x -= hspd
+                    hspd = 0
+                }
+                else
+                {
+                    x += 1
+                    hspd += 1
+                }
+                c2 = -1;
+                c1 = GetCollision(bbox_right,y);
+                if( (y&amp;$1f)&gt;0 ) c2=GetCollision(bbox_right,y+32);
+                if(  c1&gt;=0 ) || ( c2&gt;=0 )
+                {
+                    x = (x&amp;$ffffffe0) + 16;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            while(hspd&gt;0)
+            {
+                if hspd&lt;1
+                {
+                    x -= hspd
+                    hspd = 0
+                }
+                else
+                {
+                    x -= 1
+                    hspd -= 1
+                }
+                c2 = -1;
+                c1 = GetCollision(bbox_left,y);
+                if( (y&amp;$1f)&gt;0 ) c2=GetCollision(bbox_left,y+32);
+                if(  c1&gt;=0 ) || ( c2&gt;=0 )
+                {
+                    x = (x&amp;$ffffffe0)+16;
+                    break;
+                }
+            }
+        }
+        var vspd = lengthdir_y(recoilSpeed,recoilDirection)
+        if vspd&lt;0
+        {
+            while(vspd&lt;0)
+            {
+                if vspd&gt;-1
+                {
+                    y += vspd
+                    vspd = 0
+                }
+                else
+                {
+                    y -= 1
+                    vspd += 1
+                }
+                c2 = -1;
+                c1 = GetCollision(bbox_left,y);
+                c2 = GetCollision(bbox_right,y);
+                if( c1&gt;=0 || c2&gt;=0 )
+                {
+                    y = (y&amp;$ffffffe0)+32;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            while(vspd&gt;0)
+            {
+                if vspd&lt;1
+                {
+                    y += vspd
+                    vspd = 0
+                }
+                else
+                {
+                    y += 1
+                    vspd -= 1
+                }
+                c2 = -1;
+                c1 = GetCollision(bbox_left,y+32);
+                c2 = GetCollision(bbox_right,y+32);
+                if( c1&gt;=0 || c2&gt;=0 )
+                {
+                    y = (y&amp;$ffffffe0);
+                    break;
+                }
+            }
+        }
+    recoilSpeed-=.5
+}
+/// Do payer "jump"
+if( jump &lt; 2 ) 
+{
+    if ((( keys[JUMP_KEY] ) and disableInput=false) or (shooting=false and keys[JUMP_KEY])){
+        if jumpPressed=false{
+            jumpPressed=true
+            grav=-8;
+            jump++;
+        }
     }
+    else
+    jumpPressed=false
 }
 
 
@@ -125,7 +235,7 @@ if( grav&lt;0 )
 }
 else{
     // Otherwise, check above player
-    if( jump )
+    if( jump &gt; 0)
     {
         if( dir=1){
             image_xscale = 1;
@@ -134,7 +244,7 @@ else{
         }    
     }else{
         grav=0;
-        jump=true;
+        jump++;
     }
     c2 = -1;
     c1 = GetCollision(bbox_left,y+32);
@@ -159,9 +269,6 @@ else{
 if(( keys[LEFT_KEY] ) and disableInput=false) or (shooting=false and keys[LEFT_KEY])
 {
     dir=-1;
-    if(!jump){
-        image_xscale = -1;
-    }
     x=x-xspeed;
     c2=-1;
     c1 = GetCollision(bbox_left,y);
@@ -174,9 +281,6 @@ if(( keys[LEFT_KEY] ) and disableInput=false) or (shooting=false and keys[LEFT_K
 {
     // Otherwise, check collision to the right
     dir=1;
-    if(!jump){
-        image_xscale = 1;
-    }
     x=x+xspeed;
     c2 = -1;
     c1 = GetCollision(bbox_right,y);
@@ -230,6 +334,36 @@ if(( keys[LEFT_KEY] ) and disableInput=false) or (shooting=false and keys[LEFT_K
 //    }
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if x&lt;0
+x=room_width
+else if x&gt;room_width
+x=0
+if y&lt;0
+y=room_height
+else if y&gt;room_height
+y=0
 </string>
           </argument>
         </arguments>

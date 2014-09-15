@@ -6,3 +6,4 @@ bulletStringCD=2    //frames between each bullet in the string
 rof=room_speed      //cooldown timer
 laser_sight=true    //display lazer sight
 disableInput=true   //does shooting diable input
+recoil=3            //recoil amount STATIC defined by gun
