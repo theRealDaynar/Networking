@@ -314,7 +314,7 @@ if(( keys[LEFT_KEY] ) and disableInput=false) or (shooting=false and keys[LEFT_K
             else
                 aimAngle=point_direction(x,y+23,aimX,aimY);
         }
-        if client=false
+        /*if client=false
         with(oServer)
         {
             var mBuffer = buffer_create(1, buffer_grow, 1)
@@ -330,7 +330,7 @@ if(( keys[LEFT_KEY] ) and disableInput=false) or (shooting=false and keys[LEFT_K
                 }
             }
             buffer_delete(mBuffer)
-        }
+        }*/
 //    }
 }
 
