@@ -357,13 +357,25 @@ if(( keys[LEFT_KEY] ) and disableInput=false) or (shooting=false and keys[LEFT_K
           <argument>
             <kind>1</kind>
             <string>if x&lt;0
-x=room_width
+{
+x=room_width-1
+y=yprevious
+}
 else if x&gt;room_width
-x=0
+{
+x=1
+y=yprevious
+}
 if y&lt;0
-y=room_height
+{
+y=room_height-1
+x=xprevious
+}
 else if y&gt;room_height
-y=0
+{
+y=1
+x=xprevious
+}
 </string>
           </argument>
         </arguments>

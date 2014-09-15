@@ -115,13 +115,25 @@ if GetCollision(x,y+vspeed)!=-1 {vspeed=-vspeed}
           <argument>
             <kind>1</kind>
             <string>if x&lt;0
-x=room_width
-else if x&gt;room_width-1
+{
+x=room_width-1
+y=yprevious
+}
+else if x&gt;room_width
+{
 x=1
+y=yprevious
+}
 if y&lt;0
-y=room_height
-else if y&gt;room_height-1
+{
+y=room_height-1
+x=xprevious
+}
+else if y&gt;room_height
+{
 y=1
+x=xprevious
+}
 </string>
           </argument>
         </arguments>
