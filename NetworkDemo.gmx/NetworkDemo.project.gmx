@@ -117,8 +117,8 @@
     <constant name="PLAYERDC_CMD">6</constant>
     <constant name="GUN_ANGLE_CMD">7</constant>
     <constant name="ADD_BULLET">8</constant>
-    <constant name="GM_version">'1.0.0.5'</constant>
-    <constant name="GM_build_date">41897.0847368403</constant>
+    <constant name="GM_version">'1.0.0.1'</constant>
+    <constant name="GM_build_date">41897.1761158218</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
