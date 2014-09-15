@@ -72,8 +72,14 @@
           <argument>
             <kind>1</kind>
             <string>var colInst = instance_position(x, y, oPlayer)
-if GetCollision(x,y)!=-1 or (colInst!=noone and colInst.id!=owner and colInst.client=true)
+if GetCollision(x,y)!=-1 or
+(colInst!=noone and colInst.id!=owner and colInst.client=true)
 instance_destroy()
+
+if GetCollision(x+hspeed,y)!=-1 {hspeed=-hspeed}
+if GetCollision(x,y+vspeed)!=-1 {vspeed=-vspeed}
+
+image_angle=direction
 </string>
           </argument>
         </arguments>

@@ -86,8 +86,12 @@
           <argument>
             <kind>1</kind>
             <string>var colInst = instance_position(x, y, oPlayer)
-if GetCollision(x,y)!=-1 or (colInst!=noone and colInst.id!=owner)
+if GetCollision(x,y)!=-1 or
+(colInst!=noone and colInst.id!=owner and colInst.client=true)
 instance_destroy()
+
+if GetCollision(x+hspeed,y)!=-1 {hspeed=-hspeed}
+if GetCollision(x,y+vspeed)!=-1 {vspeed=-vspeed}
 </string>
           </argument>
         </arguments>
@@ -112,12 +116,12 @@ instance_destroy()
             <kind>1</kind>
             <string>if x&lt;0
 x=room_width
-else if x&gt;room_width
-x=0
+else if x&gt;room_width-1
+x=1
 if y&lt;0
 y=room_height
-else if y&gt;room_height
-y=0
+else if y&gt;room_height-1
+y=1
 </string>
           </argument>
         </arguments>
