@@ -133,8 +133,11 @@
         var truisnt = buffer_read(buff, buffer_s32 );
         var pos = ds_list_find_index(global.ServerInstances,truisnt);
         var inst = ds_list_find_value(global.ClientInstances,pos);
-        var newAngle = buffer_read(buff, buffer_s16);
-        inst.aimAngle = newAngle
+        if inst!=ClientPlayer
+        {
+            var newAngle = buffer_read(buff, buffer_s16);
+            inst.aimAngle = newAngle
+        }
         /*file_text_write_string(textfile,"Server instance: " + string(truisnt) )
         file_text_writeln(textfile)
         file_text_write_string(textfile,"Client instance: " + string(inst) )
