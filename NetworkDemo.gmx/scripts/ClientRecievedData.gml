@@ -159,7 +159,7 @@
                 var ox = buffer_read(buff,buffer_s16)     //x
                 var oy = buffer_read(buff,buffer_s16)     //y
                 var synco = instance_create(ox,oy,o);
-                if sprites = i+1 and ClientPlayer=oClient.id
+                if sprites = 0 and ClientPlayer=oClient.id
                     ClientPlayer = synco
                 synco.sprite_index = buffer_read(buff,buffer_s16)    //sprite_index
                 synco.image_index = buffer_read(buff,buffer_s16);     //image_index
