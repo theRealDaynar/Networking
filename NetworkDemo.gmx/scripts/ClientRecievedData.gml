@@ -174,10 +174,10 @@
                 with(synco)
                 {
                     client=true
-                    if image_index=2
-                    {
+                    if image_index=1
+                        InitRocket()
+                    else if image_index=2
                             InitSniper()
-                    }
                     else if image_index=3
                             InitBulletThrower()
                     else if image_index>3

@@ -54,6 +54,7 @@
       <scripts name="Init">
         <script>scripts\InitGatgat.gml</script>
         <script>scripts\InitShoto.gml</script>
+        <script>scripts\InitRocket.gml</script>
         <script>scripts\InitBulletThrower.gml</script>
         <script>scripts\InitSniper.gml</script>
       </scripts>
@@ -117,8 +118,8 @@
     <constant name="PLAYERDC_CMD">6</constant>
     <constant name="GUN_ANGLE_CMD">7</constant>
     <constant name="ADD_BULLET">8</constant>
-    <constant name="GM_version">'1.0.0.1'</constant>
-    <constant name="GM_build_date">41897.1612876389</constant>
+    <constant name="GM_version">'1.0.0.2'</constant>
+    <constant name="GM_build_date">41898.0564339236</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
