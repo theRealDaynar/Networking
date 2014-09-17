@@ -118,6 +118,9 @@ with(oPlayer)
         }
         buffer_write(stateBuffer, buffer_s16, aimX)
         buffer_write(stateBuffer, buffer_s16, aimY)
+        buffer_write(stateBuffer, buffer_s8, grav)
+        buffer_write(stateBuffer, buffer_s8, recoilSpeed)
+        buffer_write(stateBuffer, buffer_s16, recoilDirection)
     }
 }
 buffer_write(stateBuffer, buffer_u8, global.BulletCount)
@@ -136,7 +139,7 @@ if( count&gt;0 )
     }
 }
 buffer_delete(stateBuffer)
-alarm[1] = 5
+alarm[1] = 20
 </string>
           </argument>
         </arguments>

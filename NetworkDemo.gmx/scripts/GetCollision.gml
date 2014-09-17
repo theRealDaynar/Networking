@@ -10,6 +10,7 @@ if( argument1<0) return -1;
 var xx,yy;
 
 xx = floor(argument0/32) + (floor(argument1/32) * floor(room_width/32));
-if( global.mapsize<xx ) return -1;
+if( global.mapsize<xx or xx<0) return -1;
+else
 return global.map[ xx ];
 

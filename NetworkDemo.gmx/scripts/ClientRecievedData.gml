@@ -36,17 +36,17 @@
             {
                 var truisnt = buffer_read(buff, buffer_u32)
                 var inst = ds_list_find_value(global.ClientInstances,ds_list_find_index(global.ServerInstances,truisnt));
-                if inst >0
+                inst.x = buffer_read(buff, buffer_s16)
+                inst.y = buffer_read(buff, buffer_s16)
+                for(var ii = 0;ii < 4;ii++)
                 {
-                    inst.x = buffer_read(buff, buffer_s16)
-                    inst.y = buffer_read(buff, buffer_s16)
-                    for(var ii = 0;ii < 4;ii++)
-                    {
-                        inst.keys[ii] = buffer_read(buff, buffer_bool)
-                    }
-                    inst.aimX = buffer_read(buff, buffer_s16)
-                    inst.aimY = buffer_read(buff, buffer_s16)
+                    inst.keys[ii] = buffer_read(buff, buffer_bool)
                 }
+                inst.aimX = buffer_read(buff, buffer_s16)
+                inst.aimY = buffer_read(buff, buffer_s16)
+                inst.grav = buffer_read(buff, buffer_s8)
+                inst.recoilSpeed = buffer_read(buff, buffer_s8)
+                inst.recoilDirection = buffer_read(buff, buffer_s16)
             }
             var uBulletNum = buffer_read(buff, buffer_u8)
             for(i = 0; i<uBulletNum;i++)
