@@ -3,7 +3,7 @@
     // get the buffer the data resides in
     var buff = ds_map_find_value(async_load, "buffer");
     // read ythe command 
-    buffer_save(buff, "Client recieve debuff buffer.txt");
+    //buffer_save(buff, "Client recieve debuff buffer.txt");
     //textfile = file_text_open_append("Client Network Log.txt");
     // Get the socket ID - this is the CLIENT socket ID. We can use this as a "key" for this client
     //var sock = ds_map_find_value(async_load, "id");
@@ -13,8 +13,60 @@
     file_text_writeln(textfile)
     file_text_write_string(textfile,"CMD: "+string(cmd))
     file_text_writeln(textfile)*/
+    if cmd = -1
+    {
+    
+        //read shotgun approch
+        
+        //if update is more recent than last update
+        var TlastUpdate = buffer_read(buff, buffer_u32)
+        if lastUpdate < TlastUpdate
+        {
+            lastUpdate = TlastUpdate
+            //send acknoledgement to server
+            var pingS = buffer_create(1, buffer_grow, 1)
+            buffer_write(pingS, buffer_s16, -1)
+            buffer_write(pingS, buffer_u32, lastUpdate)
+            buffer_write(pingS, buffer_u32, buffer_read(buff, buffer_u32))
+            network_send_packet( client, pingS, buffer_get_size(pingS) );
+            buffer_delete(pingS)
+            //update information on player characters
+            var uPlayerNum = buffer_read(buff, buffer_u8)
+            for(var i = 0; i<uPlayerNum;i++)
+            {
+                var truisnt = buffer_read(buff, buffer_u32)
+                var inst = ds_list_find_value(global.ClientInstances,ds_list_find_index(global.ServerInstances,truisnt));
+                if inst >0
+                {
+                    inst.x = buffer_read(buff, buffer_s16)
+                    inst.y = buffer_read(buff, buffer_s16)
+                    for(var ii = 0;ii < 4;ii++)
+                    {
+                        inst.keys[ii] = buffer_read(buff, buffer_bool)
+                    }
+                    inst.aimX = buffer_read(buff, buffer_s16)
+                    inst.aimY = buffer_read(buff, buffer_s16)
+                }
+            }
+            var uBulletNum = buffer_read(buff, buffer_u8)
+            for(i = 0; i<uBulletNum;i++)
+            {
+                inst = instance_find(oClientProjectile, i)
+                if inst < 0
+                    inst = instance_create(0,0,oClientProjectile)
+                inst.x = buffer_read(buff, buffer_s16)
+                inst.y = buffer_read(buff, buffer_s16)
+                inst.direction = buffer_read(buff, buffer_s16);
+            }
+            while(instance_find(oClientProjectile,i-1)>0)
+            {
+                with(instance_find(oClientProjectile,i++))
+                    instance_destroy()
+            }
+        }
+    
     // Is this a KEY command?
-    if( cmd==KEY_CMD )    
+    }else if( cmd==KEY_CMD )    
     {
         var truisnt = buffer_read(buff, buffer_s32 );
         var pos = ds_list_find_index(global.ServerInstances,truisnt);

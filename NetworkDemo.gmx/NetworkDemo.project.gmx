@@ -120,7 +120,7 @@
     <constant name="ADD_BULLET">8</constant>
     <constant name="FIRST_SYNC_CMD">9</constant>
     <constant name="GM_version">'1.0.0.1'</constant>
-    <constant name="GM_build_date">41899.0740182176</constant>
+    <constant name="GM_build_date">41899.1361183333</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

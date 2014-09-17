@@ -78,7 +78,7 @@
         {
             for(i=0;i<count;i++)
             { 
-                network_send_packet( ds_list_find_value(socketlist,i), buffzz, buffer_get_size(buffzz));
+                //network_send_packet( ds_list_find_value(socketlist,i), buffzz, buffer_get_size(buffzz));
             }
             buffer_delete(buffzz)
         }
@@ -172,7 +172,7 @@
         {
             for(i=0;i<count;i++)
             { 
-                network_send_packet( ds_list_find_value(socketlist,i),mBuffer, buffer_get_size(mBuffer));
+                //network_send_packet( ds_list_find_value(socketlist,i),mBuffer, buffer_get_size(mBuffer));
             }
         }
         buffer_delete(mBuffer)

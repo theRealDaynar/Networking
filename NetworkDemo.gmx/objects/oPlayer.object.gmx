@@ -326,7 +326,7 @@ if(( keys[LEFT_KEY] ) and disableInput=false) or (shooting=false and keys[LEFT_K
             {
                 for(i=0;i&lt;count;i++)
                 { 
-                    network_send_packet( ds_list_find_value(socketlist,i),mBuffer, buffer_get_size(mBuffer));
+                    //network_send_packet( ds_list_find_value(socketlist,i),mBuffer, buffer_get_size(mBuffer));
                 }
             }
             buffer_delete(mBuffer)

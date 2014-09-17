@@ -76,7 +76,7 @@ if( server&lt;0 ){
 // Setup a timer so we can broadcast the server IP out to local clients looking...
 alarm[0]=60;
 // Shotgun state to client
-alarm[1]=20
+alarm[1]=5
 statesSent=0
 </string>
           </argument>
@@ -100,7 +100,9 @@ statesSent=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>buffer_write(stateBuffer, buffer_u32, sentStateNum)
+            <string>var stateBuffer = buffer_create(1, buffer_grow, 1)
+buffer_write(stateBuffer, buffer_s16, -1)
+buffer_write(stateBuffer, buffer_u32, statesSent++)
 buffer_write(stateBuffer, buffer_u32, current_time)
 buffer_write(stateBuffer, buffer_u8, global.PlayerTotal)
 with(oPlayer)
@@ -125,9 +127,16 @@ with(oServerProjectile)
     buffer_write(stateBuffer, buffer_s16, y)
     buffer_write(stateBuffer, buffer_s16, direction)
 }
-
+var count = ds_list_size(socketlist);
+if( count&gt;0 )
+{
+    for(i = 0;i &lt; count;i++)
+    { 
+        network_send_packet( ds_list_find_value(socketlist,i), stateBuffer, buffer_get_size(stateBuffer));
+    }
+}
 buffer_delete(stateBuffer)
-statesSent++
+alarm[1] = 5
 </string>
           </argument>
         </arguments>

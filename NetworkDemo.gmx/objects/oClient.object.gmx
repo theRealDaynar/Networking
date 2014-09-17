@@ -65,6 +65,7 @@ typing=false
 global.ServerInstances=ds_list_create()
 global.ClientInstances=ds_list_create()
 global.instancetest=0
+lastUpdate=-1
 </string>
           </argument>
         </arguments>
