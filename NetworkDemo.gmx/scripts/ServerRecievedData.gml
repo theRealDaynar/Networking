@@ -1,14 +1,14 @@
 /// Read incoming data to the server from a connected saocket
-{  textfile = file_text_open_append("networking log.txt");
-    file_text_write_string(textfile,"Server Recieve Data Begin")
-    file_text_writeln(textfile)
+{   //textfile = file_text_open_append("networking log.txt");
+    //file_text_write_string(textfile,"Server Recieve Data Begin")
+    //file_text_writeln(textfile)
     // get the buffer the data resides in
     var buff = ds_map_find_value(async_load, "buffer");
     buffer_save(buff, "Server recieve debuff buffer.txt");
     // read ythe command 
     var cmd = buffer_read(buff, buffer_s16 );
-    file_text_write_string(textfile,string(cmd))
-    file_text_writeln(textfile)
+    //file_text_write_string(textfile,string(cmd))
+    //file_text_writeln(textfile)
     // Get the socket ID - this is the CLIENT socket ID. We can use this as a "key" for this client
     var sock = ds_map_find_value(async_load, "id");
     // Look up the client details
@@ -19,17 +19,17 @@
     {
         // Read the key that was sent
         var key = buffer_read(buff, buffer_s16 );
-        file_text_write_string(textfile,string(key))
-        file_text_writeln(textfile)
+        //file_text_write_string(textfile,string(key))
+        //file_text_writeln(textfile)
         // And it's up/down state
         var updown = buffer_read(buff, buffer_s16 );
-        file_text_write_string(textfile,string(updown))
-        file_text_writeln(textfile)
+        //file_text_write_string(textfile,string(updown))
+        //file_text_writeln(textfile)
         // translate keypress into an index for our player array.
          
         // translate updown into a bool for the player array       
         //if( updown==0 ){
-                if updown !=0 and updown!=1
+        if updown !=0 and updown!=1
         {
             testupdown=updown
         }else
@@ -37,10 +37,10 @@
         /*}else{
             inst.keys[key] = true;
         }*/
-        file_text_write_string(textfile,"Server Recieve Data End")
+        /*file_text_write_string(textfile,"Server Recieve Data End")
         file_text_writeln(textfile)
         file_text_write_string(textfile,"Server Send Button Press Data Begin")
-        file_text_writeln(textfile)
+        file_text_writeln(textfile)*/
         buffzz = buffer_create(1, buffer_grow, 1);
         buffer_seek(buffzz, buffer_seek_start, 0);
         buffer_write(buffzz, buffer_s16, KEY_CMD );
@@ -49,8 +49,10 @@
         buffer_write(buffzz, buffer_u16, updown );
         buffer_write(buffzz, buffer_s16, inst.x );
         buffer_write(buffzz, buffer_s16, inst.y );
-        buffer_save(buffzz, "Server send keypress buffer.txt");
-        file_text_write_string(textfile,string(KEY_CMD))
+        if key = MB_LEFT
+        buffer_write(buffzz, buffer_s32 , random_get_seed())
+        //buffer_save(buffzz, "Server send keypress buffer.txt");
+        /*file_text_write_string(textfile,string(KEY_CMD))
         file_text_writeln(textfile)
         file_text_write_string(textfile,string(inst.id))
         file_text_writeln(textfile)
@@ -70,7 +72,7 @@
         file_text_write_string(textfile,string(buffer_read(b2, buffer_u16)));
         file_text_writeln(textfile)
         file_text_write_string(textfile,string(buffer_read(b2, buffer_u16)));
-        file_text_writeln(textfile)
+        file_text_writeln(textfile)*/
         var count = ds_list_size(socketlist);
         if( count>0 )
         {
@@ -92,9 +94,11 @@
     
     // Reset buffer to start - Networking ALWAYS reads from the START of the buffer
     buffer_seek(player_buffer, buffer_seek_start, 0);
-    buffer_write(player_buffer, buffer_s16, SYNC_CMD);
+    buffer_write(player_buffer, buffer_s16, FIRST_SYNC_CMD);
     // Total number of sprites (players+baddies)
-    buffer_write(player_buffer, buffer_u32, global.PlayerTotal+global.BaddieCount );
+    buffer_write(player_buffer, buffer_u32, global.PlayerTotal );
+    //identify which object the player controls
+    buffer_write(player_buffer, buffer_u32, inst);
 
     // All attached players
     with(oPlayer)
@@ -109,19 +113,6 @@
         buffer_write(global.player_buffer, buffer_string, PlayerName );
         buffer_write(global.player_buffer, buffer_s32, id );
         }
-    }
-    
-    // Now send all baddies
-    with(oBaddie)
-    {
-        buffer_write(global.player_buffer, buffer_s16, object_index );
-        buffer_write(global.player_buffer, buffer_s16, x );
-        buffer_write(global.player_buffer, buffer_s16, y );
-        buffer_write(global.player_buffer, buffer_s16, sprite_index );
-        buffer_write(global.player_buffer, buffer_s16, image_index );
-        buffer_write(global.player_buffer, buffer_s32, image_blend );
-        buffer_write(global.player_buffer, buffer_string, "Da Big Booty");
-        buffer_write(global.player_buffer, buffer_s32, id );
     }
     var buffer_size = buffer_tell(player_buffer);
     // get the socket
@@ -206,7 +197,7 @@
             }
         }
     }//*/
-    file_text_close(textfile)
+    //file_text_close(textfile)
 }
 
 

@@ -25,6 +25,8 @@
         var updown = buffer_read(buff, buffer_u16 );
         inst.x = buffer_read(buff, buffer_s16);
         inst.y = buffer_read(buff, buffer_s16);
+        if key = MB_LEFT
+            random_set_seed(buffer_read(buff, buffer_s32))
         /*file_text_write_string(textfile,"KEY COMMAND Begin")
         file_text_writeln(textfile)
         file_text_write_string(textfile,"Instance: "+string(truisnt))
@@ -106,7 +108,7 @@
         file_text_write_string(textfile,"Bullet speed: " + string(bulletID.speed) )
         file_text_writeln(textfile)*/
     }
-    else if( cmd == 9 )
+    else if( cmd == 11 )
     {
             // Get number of sprites sent
             sprites =  buffer_read(buff, buffer_u32 ); 
@@ -124,6 +126,41 @@
                 ds_list_add(allsprites, buffer_read(buff,buffer_s16) );     //image_index
                 ds_list_add(allsprites, buffer_read(buff,buffer_s32) );     //image_blend        
                 ds_list_add(allsprites, buffer_read(buff,buffer_string) );  // player name
+            }
+    }
+    else if (cmd == FIRST_SYNC_CMD)
+    {
+        sprites =  buffer_read(buff, buffer_u32 );
+        var cp = buffer_read(buff, buffer_u32)
+        for(var i=0;i<sprites;i++)
+        {
+                var o = buffer_read(buff,buffer_s16)
+                var ox = buffer_read(buff,buffer_s16)     //x
+                var oy = buffer_read(buff,buffer_s16)     //y
+                var synco = instance_create(ox,oy,o);
+                synco.sprite_index = buffer_read(buff,buffer_s16)    //sprite_index
+                synco.image_index = buffer_read(buff,buffer_s16);     //image_index
+                synco.image_blend = buffer_read(buff,buffer_s32)     //image_blend        
+                synco.name = buffer_read(buff,buffer_string)         //player name
+                var serverInst = buffer_read(buff, buffer_s32)
+                if serverInst = cp
+                ClientPlayer = synco
+                ds_list_add(global.ServerInstances,serverInst)
+                ds_list_add(global.ClientInstances,synco)
+                with(synco)
+                {
+                    client=true
+                    if image_index=1
+                        InitRocket()
+                    else if image_index=2
+                        InitSniper()
+                    else if image_index=3
+                        InitBulletThrower()
+                    else if image_index>3
+                        InitShoto()
+                    else
+                            InitGatgat()
+                }
             }
     }
     else if (cmd == GUN_ANGLE_CMD)

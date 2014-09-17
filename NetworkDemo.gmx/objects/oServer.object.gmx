@@ -130,7 +130,7 @@ alarm[0]=60;
           <argument>
             <kind>1</kind>
             <string>/// Send player data to ALL attached clients
-
+/*
 // Once a frame, we send ALL attached clients, ALL game sprites (plaeyrs and baddies)
 var count = ds_list_size(socketlist);
 if( count&gt;0 )
