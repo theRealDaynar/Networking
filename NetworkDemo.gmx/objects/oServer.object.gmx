@@ -52,6 +52,7 @@ colourindex = 0;
 // Total number of players and baddies connected
 global.PlayerTotal=0;
 global.BaddieCount = 0;
+global.BulletCount=0
 
 
 // create our server. Server creation may fail if there is already a server running. If it does fail, delete eveything and kill this instance
@@ -73,9 +74,60 @@ if( server&lt;0 ){
 }
 
 // Setup a timer so we can broadcast the server IP out to local clients looking...
-alarm[0]=60; 
+alarm[0]=60;
+// Shotgun state to client
+alarm[1]=20
+statesSent=0
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>buffer_write(stateBuffer, buffer_u32, sentStateNum)
+buffer_write(stateBuffer, buffer_u32, current_time)
+buffer_write(stateBuffer, buffer_u8, global.PlayerTotal)
+with(oPlayer)
+{
+    if client = false
+    {
+        buffer_write(stateBuffer, buffer_u32, id)
+        buffer_write(stateBuffer, buffer_s16, x)
+        buffer_write(stateBuffer, buffer_s16, y)
+        for(var i = 0;i &lt; 4;i++)
+        {
+            buffer_write(stateBuffer, buffer_bool, keys[i])
+        }
+        buffer_write(stateBuffer, buffer_s16, aimX)
+        buffer_write(stateBuffer, buffer_s16, aimY)
+    }
+}
+buffer_write(stateBuffer, buffer_u8, global.BulletCount)
+with(oServerProjectile)
+{
+    buffer_write(stateBuffer, buffer_s16, x)
+    buffer_write(stateBuffer, buffer_s16, y)
+    buffer_write(stateBuffer, buffer_s16, direction)
+}
 
-
+buffer_delete(stateBuffer)
+statesSent++
 </string>
           </argument>
         </arguments>
