@@ -29,8 +29,6 @@
             var cTimeDiff = newClienttime-clienttime
             var sTimeDiff = newServertime-servertime
             var timeInThePast = newClienttime - (cTimeDiff-sTimeDiff)
-            servertime=newServertime
-            clienttime=newClienttime
             buffer_write(pingS, buffer_s16, -1)
             buffer_write(pingS, buffer_u32, lastUpdate)
             buffer_write(pingS, buffer_u32, servertime)
@@ -62,6 +60,7 @@
                 inst.recoilSpeed = buffer_read(buff, buffer_s8)
                 inst.recoilDirection = buffer_read(buff, buffer_s16)
                 var lostSteps = floor((current_time-timeInThePast)/(1000/room_speed));
+                if servertime=0
                 for(ii = 0;ii<lostSteps;ii++)
                     event_perform_object(inst,ev_step,ev_step_normal)
             }
@@ -75,6 +74,7 @@
                 inst.y = buffer_read(buff, buffer_s16)
                 inst.direction = buffer_read(buff, buffer_s16);
                 var lostSteps = floor((current_time-timeInThePast)/(1000/room_speed));
+                if servertime!=0
                 repeat(lostSteps)
                 {
                     inst.x+=hspeed
@@ -86,6 +86,8 @@
                 with(instance_find(oClientProjectile,i++))
                     instance_destroy()
             }
+            servertime=newServertime
+            clienttime=newClienttime
         }
     
     // Is this a KEY command?
