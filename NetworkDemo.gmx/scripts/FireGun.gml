@@ -23,7 +23,10 @@ if chargeUpTime<=chargeUp
             instProj.owner = id
         }
         else if image_xscale=-1
+        {
+            changeTimeStamps[4]=current_time
             aimMode=180
+        }
         //SendBullet(instProj)
         spreadDir -= bulletArc/bulletNum
         recoilSpeed = recoil

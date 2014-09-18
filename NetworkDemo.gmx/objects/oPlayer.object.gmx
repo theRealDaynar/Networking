@@ -26,7 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>/// Initialise the player and map
-CreateCollisionMap();
 
 image_speed = 0;
 PlayerName="";
@@ -307,13 +306,10 @@ if(( keys[LEFT_KEY] ) and disableInput=false) or (shooting=false and keys[LEFT_K
     
     if xprevious!=x or yprevious!=y
     {
-        if client=false or oClient.ClientPlayer=id
-        {
             if image_xscale=-1
                 aimAngle=point_direction(aimX,aimY,x,y+23);
             else
                 aimAngle=point_direction(x,y+23,aimX,aimY);
-        }
         if client=false
         with(oServer)
         {

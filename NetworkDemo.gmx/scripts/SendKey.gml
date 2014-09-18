@@ -5,6 +5,7 @@
 ///
 {
     ClientPlayer.keys[argument0]=argument1
+    ClientPlayer.changeTimeStamps[argument0]=current_time
     // Move to start of buffer. Networking ALWAYS takes the data from the START of a buffer.
     buffer_seek(buff, buffer_seek_start, 0);
 

@@ -33,7 +33,7 @@ clienty = 192;
 PlayerName=global.ServerName;   // get the name that was selected (it's a server OR player name)
 PlayerChar=global.s
 ClientPlayer=id
-
+CreateCollisionMap();
 
 // Create a buffer for the network messages
 buff = buffer_create(256, buffer_grow, 1);
@@ -66,6 +66,10 @@ global.ServerInstances=ds_list_create()
 global.ClientInstances=ds_list_create()
 global.instancetest=0
 lastUpdate=-1
+servertime=0
+clienttime=0
+for(var i = 0;i&lt;5;i++)
+changeTimeStamps[i]=0
 </string>
           </argument>
         </arguments>

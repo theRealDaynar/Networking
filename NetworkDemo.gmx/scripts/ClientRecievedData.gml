@@ -17,7 +17,6 @@
     {
     
         //read shotgun approch
-        
         //if update is more recent than last update
         var TlastUpdate = buffer_read(buff, buffer_u32)
         if lastUpdate < TlastUpdate
@@ -25,9 +24,16 @@
             lastUpdate = TlastUpdate
             //send acknoledgement to server
             var pingS = buffer_create(1, buffer_grow, 1)
+            var newServertime = buffer_read(buff, buffer_u32)
+            var newClienttime = current_time
+            var cTimeDiff = newClienttime-clienttime
+            var sTimeDiff = newServertime-servertime
+            var timeInThePast = newClienttime - (cTimeDiff-sTimeDiff)
+            servertime=newServertime
+            clienttime=newClienttime
             buffer_write(pingS, buffer_s16, -1)
             buffer_write(pingS, buffer_u32, lastUpdate)
-            buffer_write(pingS, buffer_u32, buffer_read(buff, buffer_u32))
+            buffer_write(pingS, buffer_u32, servertime)
             network_send_packet( client, pingS, buffer_get_size(pingS) );
             buffer_delete(pingS)
             //update information on player characters
@@ -40,13 +46,24 @@
                 inst.y = buffer_read(buff, buffer_s16)
                 for(var ii = 0;ii < 4;ii++)
                 {
-                    inst.keys[ii] = buffer_read(buff, buffer_bool)
+                        inst.keys[ii] = buffer_read(buff, buffer_bool)
                 }
                 inst.aimX = buffer_read(buff, buffer_s16)
                 inst.aimY = buffer_read(buff, buffer_s16)
+                if inst!=ClientPlayer
+                    with(inst)
+                    {
+                        if image_xscale=-1
+                            aimAngle=point_direction(aimX,aimY,x,y+23);
+                        else
+                            aimAngle=point_direction(x,y+23,aimX,aimY);
+                    }
                 inst.grav = buffer_read(buff, buffer_s8)
                 inst.recoilSpeed = buffer_read(buff, buffer_s8)
                 inst.recoilDirection = buffer_read(buff, buffer_s16)
+                var lostSteps = floor((current_time-timeInThePast)/(1000/room_speed));
+                for(ii = 0;ii<lostSteps;ii++)
+                    event_perform_object(inst,ev_step,ev_step_normal)
             }
             var uBulletNum = buffer_read(buff, buffer_u8)
             for(i = 0; i<uBulletNum;i++)
@@ -57,6 +74,12 @@
                 inst.x = buffer_read(buff, buffer_s16)
                 inst.y = buffer_read(buff, buffer_s16)
                 inst.direction = buffer_read(buff, buffer_s16);
+                var lostSteps = floor((current_time-timeInThePast)/(1000/room_speed));
+                repeat(lostSteps)
+                {
+                    inst.x+=hspeed
+                    inst.y+=vspeed
+                }
             }
             while(instance_find(oClientProjectile,i-1)>0)
             {
@@ -251,8 +274,6 @@
                 var ox = buffer_read(buff,buffer_s16)     //x
                 var oy = buffer_read(buff,buffer_s16)     //y
                 var synco = instance_create(ox,oy,o);
-                if sprites = 0 and ClientPlayer=oClient.id
-                    ClientPlayer = synco
                 synco.sprite_index = buffer_read(buff,buffer_s16)    //sprite_index
                 synco.image_index = buffer_read(buff,buffer_s16);     //image_index
                 synco.image_blend = buffer_read(buff,buffer_s32)     //image_blend        
