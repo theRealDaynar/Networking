@@ -77,6 +77,7 @@ if( server&lt;0 ){
 alarm[0]=60;
 // Shotgun state to client
 statesSent=0
+alarm[1]=20
 </string>
           </argument>
         </arguments>
@@ -170,6 +171,7 @@ alarm[0]=60;
             }
         }
 buffer_delete(stateBuffer)
+alarm[1]=20
 </string>
           </argument>
         </arguments>
