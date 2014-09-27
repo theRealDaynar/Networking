@@ -42,6 +42,19 @@
                 var inst = ds_list_find_value(global.ClientInstances,ds_list_find_index(global.ServerInstances,truisnt));
                 inst.x = buffer_read(buff, buffer_s16)
                 inst.y = buffer_read(buff, buffer_s16)
+                var neededCorrection = distance_to_point(xprevious, yprevious)
+                if neededCorrection > 2
+                {
+                    mx = xprevious - x
+                    my = yprevious - y
+                    if neededCorrection < 5
+                        ms = 1
+                    else if neededCorrection < 15
+                        ms = 3
+                    else
+                        ms = room_speed/(neededCorrection*2)
+                    
+                }
                 for(var ii = 0;ii < 4;ii++)
                 {
                         inst.keys[ii] = buffer_read(buff, buffer_bool)

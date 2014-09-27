@@ -50,7 +50,8 @@ speed=5
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(x-16,y-16,oPuff)
+            <string>if !instance_exists(oServer)
+instance_create(x-16,y-16,oPuff)
 </string>
           </argument>
         </arguments>

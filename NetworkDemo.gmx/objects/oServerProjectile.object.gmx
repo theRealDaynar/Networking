@@ -51,6 +51,7 @@ global.BulletCount++
           <argument>
             <kind>1</kind>
             <string>global.BulletCount--
+instance_create(x-16,y-16,oPuff)
 /*with(oServer)
 {
     global.pBuffer = buffer_create(1, buffer_grow, 1)
@@ -117,6 +118,11 @@ instance_destroy()
 
 if GetCollision(x+hspeed,y)!=-1 {hspeed=-hspeed}
 if GetCollision(x,y+vspeed)!=-1 {vspeed=-vspeed}
+if GetCollision(x+hspeed,y+vspeed)!=-1
+{
+hspeed=-hspeed
+vspeed=-vspeed
+}
 </string>
           </argument>
         </arguments>

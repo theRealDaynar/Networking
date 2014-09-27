@@ -66,7 +66,9 @@ recoil=0            //recoil amount STATIC defined by gun
 recoilSpeed=0       //recoil speed used to actually move the player
 recoilDirection=0   //direction recoiled
 
-
+mx=0
+my=0
+ms=0
 hp = 10
 </string>
           </argument>
@@ -396,11 +398,27 @@ x=xprevious
             <kind>1</kind>
             <string>if client=true
 {
-    draw_self()
-    if image_xscale = 1
-        draw_sprite_ext(gun,0,x,y+23,1,1,aimAngle,c_white,1)
+    if ms &lt; 0
+    {
+        draw_self()
+        if image_xscale = 1
+            draw_sprite_ext(gun,0,x,y+23,1,1,aimAngle,c_white,1)
+        else
+            draw_sprite_ext(gun,0,x,y+23,-1,1,aimAngle,c_white,1)
+    }
     else
-        draw_sprite_ext(gun,0,x,y+23,-1,1,aimAngle,c_white,1)
+    {
+        draw_sprite_ext(sprite_index,image_index,mx + x,my + y,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
+        if image_xscale = 1
+            draw_sprite_ext(gun,0,mx + x,my + y + 23,1,1,aimAngle,c_white,1)
+        else
+            draw_sprite_ext(gun,0,mx + x,my + y + 23,-1,1,aimAngle,c_white,1)
+        if distance_to_point(mx,my)&lt;=ms
+            ms = 0
+        var mdir = point_direction(mx + x,my + y,x,y);
+        mx += lengthdir_x(ms,mdir)
+        my += lengthdir_y(ms,mdir)
+    }
     if laser_sight=true
     {
         DrawLaserSight()
