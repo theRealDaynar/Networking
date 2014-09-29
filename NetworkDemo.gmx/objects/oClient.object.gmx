@@ -70,6 +70,37 @@ servertime=0
 clienttime=0
 for(var i = 0;i&lt;5;i++)
 changeTimeStamps[i]=0
+showScoreBoard=0
+draw_set_color(c_red);
+blinkingChar=""
+alarm[1]=room_speed/2
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if blinkingChar=""
+blinkingChar="_"
+else
+blinkingChar=""
+alarm[1]=room_speed/2
 </string>
           </argument>
         </arguments>
@@ -149,6 +180,11 @@ if keyboard_check_released(ord("D"))
 SendKey(RIGHT_KEY,0);
 else if keyboard_check_pressed(ord("D"))
 SendKey(RIGHT_KEY,1);
+
+if keyboard_check_released(vk_tab)
+{
+    showScoreBoard=abs(showScoreBoard-1)
+}
 </string>
           </argument>
         </arguments>
@@ -259,14 +295,35 @@ if( client == eventid )
             <string>draw_set_halign(fa_left)
 for(i=0;i&lt;ds_list_size(global.chat);i++;)
 {
-    draw_text(30,room_height-30-i*15,ds_list_find_value(global.chat,ds_list_size(global.chat)-(i+1)))
+    draw_text(30,room_height-45-i*15,ds_list_find_value(global.chat,ds_list_size(global.chat)-(i+1)))
 }
 if typing=true
 {
-draw_text(30,room_height-15,keyboard_string)
+draw_set_alpha(.5)
+draw_rectangle_color(0,room_height*4/5,room_width/3,room_height,c_black,c_black,c_black,c_black,false)
+draw_set_alpha(1)
+draw_text(30,room_height-30,keyboard_string+blinkingChar)
 }
 draw_text(10,50,string(global.instancetest))
 draw_set_halign(fa_center)
+if showScoreBoard = true
+{
+draw_set_color(c_black)
+draw_set_alpha(.5)
+draw_rectangle(room_width*4/5,0,room_width,room_height/2,false)
+draw_set_alpha(1)
+tempy=10
+with(oPlayer)
+{
+    if client =true
+    {
+        draw_sprite(sprite_index,image_index,room_width*5/6,other.tempy)
+        draw_set_color(c_white)
+        draw_text(room_width*5/6+90,other.tempy+8,"Deaths: "+string(deaths))
+        other.tempy+=34
+    }
+}
+}
 
 </string>
           </argument>
@@ -290,7 +347,8 @@ draw_set_halign(fa_center)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*/// Draw all sprites in level
+            <string>
+/*/// Draw all sprites in level
 
 // set the X and Y of the client so the room "follows" our player
 x = clientx;

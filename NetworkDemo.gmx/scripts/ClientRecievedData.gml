@@ -40,21 +40,43 @@
             {
                 var truisnt = buffer_read(buff, buffer_u32)
                 var inst = ds_list_find_value(global.ClientInstances,ds_list_find_index(global.ServerInstances,truisnt));
+                var newdeaths = buffer_read(buff, buffer_u8)
+                if inst!=0
+                {
+                    var olddeaths = inst.deaths ;
+                    inst.deaths=newdeaths
+                    if newdeaths>olddeaths
+                                    {
+                (instance_create(room_width/2,room_height/2,oCongratsText)).text1=inst.PlayerName+" has been slain!"
+                with(inst)
+                    for(var ii; i<5;i++)
+                        instance_create(bbox_left+random(bbox_right-bbox_left),bbox_top+random(bbox_bottom-bbox_top),oPuff)
+                }
+                }
+                else
+                var olddeaths=newdeaths-1;
                 inst.x = buffer_read(buff, buffer_s16)
                 inst.y = buffer_read(buff, buffer_s16)
-                var neededCorrection = distance_to_point(xprevious, yprevious)
-                if neededCorrection > 2
+                if olddeaths=newdeaths
                 {
-                    mx = xprevious - x
-                    my = yprevious - y
-                    if neededCorrection < 5
-                        ms = 1
-                    else if neededCorrection < 15
-                        ms = 3
-                    else
-                        ms = room_speed/(neededCorrection*2)
-                    
+                    with(inst)
+                    {
+                        var neededCorrection = distance_to_point(xprevious, yprevious)
+                        if neededCorrection > 2 and neededCorrection < 500
+                        {
+                            mx = xprevious - x
+                            my = yprevious - y
+                            if neededCorrection < 5
+                                ms = 1
+                            else if neededCorrection < 15
+                                ms = 3
+                            else
+                                ms = neededCorrection/10
+                            
+                        }
+                    }
                 }
+
                 for(var ii = 0;ii < 4;ii++)
                 {
                         inst.keys[ii] = buffer_read(buff, buffer_bool)
@@ -78,6 +100,9 @@
                     event_perform_object(inst,ev_step,ev_step_normal)
             }
             var uBulletNum = buffer_read(buff, buffer_u8)
+            if uBulletNum = 0
+                with(oClientProjectile)
+                    instance_destroy()
             for(i = 0; i<uBulletNum;i++)
             {
                 inst = instance_find(oClientProjectile, i)
@@ -231,7 +256,7 @@
                 synco.sprite_index = buffer_read(buff,buffer_s16)    //sprite_index
                 synco.image_index = buffer_read(buff,buffer_s16);     //image_index
                 synco.image_blend = buffer_read(buff,buffer_s32)     //image_blend        
-                synco.name = buffer_read(buff,buffer_string)         //player name
+                synco.PlayerName = buffer_read(buff,buffer_string)         //player name
                 var serverInst = buffer_read(buff, buffer_s32)
                 if serverInst = cp
                 ClientPlayer = synco
@@ -292,7 +317,7 @@
                 synco.sprite_index = buffer_read(buff,buffer_s16)    //sprite_index
                 synco.image_index = buffer_read(buff,buffer_s16);     //image_index
                 synco.image_blend = buffer_read(buff,buffer_s32)     //image_blend        
-                synco.name = buffer_read(buff,buffer_string)         //player name
+                synco.PlayerName = buffer_read(buff,buffer_string)         //player name
                 var serverInst = buffer_read(buff, buffer_s32)
                 ds_list_add(global.ServerInstances,serverInst)
                 ds_list_add(global.ClientInstances,synco)

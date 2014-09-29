@@ -143,6 +143,7 @@ alarm[0]=60;
             if client = false
             {
                 buffer_write(stateBuffer, buffer_u32, id)
+                buffer_write(stateBuffer, buffer_u8, deaths)
                 buffer_write(stateBuffer, buffer_s16, x)
                 buffer_write(stateBuffer, buffer_s16, y)
                 for(var i = 0;i &lt; 4;i++)

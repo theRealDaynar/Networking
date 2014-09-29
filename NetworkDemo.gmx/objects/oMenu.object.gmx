@@ -50,6 +50,8 @@ ds_list_add(global.serverlist, "25.32.155.97");
 ds_list_add(global.servernames, "Default Xenfare");
 ds_list_add(global.serverlist, "67.183.65.135");
 ds_list_add(global.servernames, "Default Junk Knight");
+ipTextBox = oTextBox
+nameTextBox = oTextBox
 </string>
           </argument>
         </arguments>
@@ -72,7 +74,7 @@ ds_list_add(global.servernames, "Default Junk Knight");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.connectip = oTextBox.Text;
+            <string>global.connectip = ipTextBox.Text;
 alarm[0] = 2;
 </string>
           </argument>
@@ -97,8 +99,7 @@ alarm[0] = 2;
           <argument>
             <kind>1</kind>
             <string>/// Start game - local client+server
-var i = iServerName;
-global.ServerName = i.Text;
+global.ServerName = nameTextBox.Text;
 global.Server = instance_create(0,0,oServer);
 if( global.haveserver == false ){
     show_debug_message("Cant create server");
@@ -134,8 +135,7 @@ if( global.haveserver == false ){
           <argument>
             <kind>1</kind>
             <string>/// Start game - connect to a remote server
-var i = iServerName;
-global.ServerName = i.Text;
+global.ServerName = nameTextBox.Text;
 
 network_destroy(global.broadcast_server);
 global.broadcast_server = -1;

@@ -28,7 +28,7 @@
             <string>/// VERY simple text box....
 Text = "127.0.0.1"
 blinkingChar=""
-alarm[0]=room_speed/2
+selected = false
 </string>
           </argument>
         </arguments>
@@ -80,6 +80,14 @@ alarm[0]=room_speed/2
             <kind>1</kind>
             <string>/// User clicked the text box, set it's string
 keyboard_string = Text;
+with(oTextBox)
+{
+    selected = false
+    alarm[0] = 0
+    blinkingChar = ""
+}
+selected = true
+alarm[0]=room_speed/2
 </string>
           </argument>
         </arguments>
@@ -135,6 +143,7 @@ draw_text( x+5,y+5, Text + blinkingChar );
           <argument>
             <kind>1</kind>
             <string>/// Process text box
+if selected = true
 Text = keyboard_string;
 
 </string>

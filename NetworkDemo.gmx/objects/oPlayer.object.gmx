@@ -69,7 +69,10 @@ recoilDirection=0   //direction recoiled
 mx=0
 my=0
 ms=0
+kills = 0
+deaths = 0
 hp = 10
+showScoreBoard = 0
 </string>
           </argument>
         </arguments>
@@ -398,13 +401,15 @@ x=xprevious
             <kind>1</kind>
             <string>if client=true
 {
-    if ms &lt; 0
+    draw_set_halign(fa_center)
+    if ms &lt;= 0
     {
         draw_self()
         if image_xscale = 1
             draw_sprite_ext(gun,0,x,y+23,1,1,aimAngle,c_white,1)
         else
             draw_sprite_ext(gun,0,x,y+23,-1,1,aimAngle,c_white,1)
+        draw_text(x,y-25,PlayerName)
     }
     else
     {
@@ -413,7 +418,8 @@ x=xprevious
             draw_sprite_ext(gun,0,mx + x,my + y + 23,1,1,aimAngle,c_white,1)
         else
             draw_sprite_ext(gun,0,mx + x,my + y + 23,-1,1,aimAngle,c_white,1)
-        if distance_to_point(mx,my)&lt;=ms
+        draw_text(mx + x,my + y-25,PlayerName)
+        if distance_to_point(x+mx,y+my)&lt;=ms
             ms = 0
         var mdir = point_direction(mx + x,my + y,x,y);
         mx += lengthdir_x(ms,mdir)
@@ -423,6 +429,7 @@ x=xprevious
     {
         DrawLaserSight()
     }
+    draw_set_halign(fa_left)
 }
 else
 draw_rectangle_color(bbox_left,bbox_top,bbox_right,bbox_bottom,c_red,c_red,c_red,c_red,true)

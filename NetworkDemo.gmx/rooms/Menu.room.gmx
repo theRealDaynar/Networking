@@ -2,9 +2,9 @@
 <room>
   <caption></caption>
   <width>1056</width>
-  <height>768</height>
+  <height>800</height>
   <vsnap>2</vsnap>
-  <hsnap>2</hsnap>
+  <hsnap>1</hsnap>
   <isometric>0</isometric>
   <speed>30</speed>
   <persistent>0</persistent>
@@ -53,9 +53,10 @@
   <instances>
     <instance objName="oMenu" x="0" y="0" name="inst_76F20138" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oCreateServerButton" x="364" y="266" name="inst_67D0DDA8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oTextBox" x="71" y="251" name="iServerName" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oTextBox" x="71" y="251" name="iServerName" locked="0" code="oMenu.ipTextBox = id&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oCharacterSelect" x="32" y="192" name="inst_A7F11554" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oCIP" x="26" y="250" name="inst_46AE6013" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oTextBox" x="71" y="288" name="inst_6057F333" locked="0" code="oMenu.nameTextBox = id&#xA;Text = &quot;Name&quot;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
