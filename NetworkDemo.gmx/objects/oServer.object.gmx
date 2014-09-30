@@ -78,6 +78,7 @@ alarm[0]=60;
 // Shotgun state to client
 statesSent=0
 alarm[1]=20
+playing=false
 </string>
           </argument>
         </arguments>
@@ -150,6 +151,7 @@ alarm[0]=60;
                 {
                     buffer_write(stateBuffer, buffer_bool, keys[i])
                 }
+                buffer_write(stateBuffer, buffer_bool, ghost)
                 buffer_write(stateBuffer, buffer_s16, aimX)
                 buffer_write(stateBuffer, buffer_s16, aimY)
                 buffer_write(stateBuffer, buffer_s8, grav)
@@ -240,6 +242,29 @@ draw_set_color(c_red);
 draw_text(10,10,"players: "+string(global.PlayerTotal) );
 draw_text(10,30,"baddies: "+string(global.BaddieCount) );
 draw_text(10,70,"fps: "+string(fps) );
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="82">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>startGame()
 </string>
           </argument>
         </arguments>

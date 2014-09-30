@@ -46,7 +46,7 @@ file_text_writeln(textfile)
 file_text_close(textfile)
 ds_list_add(global.serverlist, "25.6.204.193");
 ds_list_add(global.servernames, "Default Daynar");
-ds_list_add(global.serverlist, "25.32.155.97");
+ds_list_add(global.serverlist, "25.157.139.130");
 ds_list_add(global.servernames, "Default Xenfare");
 ds_list_add(global.serverlist, "67.183.65.135");
 ds_list_add(global.servernames, "Default Junk Knight");

@@ -81,6 +81,7 @@
                 {
                         inst.keys[ii] = buffer_read(buff, buffer_bool)
                 }
+                inst.ghost=buffer_read(buff, buffer_bool)
                 inst.aimX = buffer_read(buff, buffer_s16)
                 inst.aimY = buffer_read(buff, buffer_s16)
                 if inst!=ClientPlayer
@@ -354,6 +355,10 @@
             }
             //file_text_write_string(textfile,"SYNC COMMAND End" )
             //file_text_writeln(textfile)
+    }else if cmd=13
+    {
+        instance_create(room_width/2,room_height/3,oCountDownLabel)
+        playing=true
     }
     /*file_text_write_string(textfile,"Client Recieve Data End")
     file_text_writeln(textfile)

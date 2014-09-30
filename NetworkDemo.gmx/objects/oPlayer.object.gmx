@@ -73,6 +73,7 @@ kills = 0
 deaths = 0
 hp = 10
 showScoreBoard = 0
+ghost = false
 </string>
           </argument>
         </arguments>
@@ -95,7 +96,7 @@ showScoreBoard = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string> /// Process the player (move+collision)
+            <string>  /// Process the player (move+collision)
 var xx,yy,c1,c2;
 if recoilSpeed&gt;0
 {
@@ -298,7 +299,7 @@ if(( keys[LEFT_KEY] ) and disableInput=false) or (shooting=false and keys[LEFT_K
     //image_xscale = 1;
 }
 //if client=false{
-    if (keys[MB_LEFT]=true or shooting=true) and rofcd&lt;=0
+    if (keys[MB_LEFT]=true or shooting=true) and rofcd&lt;=0 and ghost=false
     {
         FireGun()
     }
@@ -334,7 +335,6 @@ if(( keys[LEFT_KEY] ) and disableInput=false) or (shooting=false and keys[LEFT_K
         }//*/
 //    }
 }
-
 </string>
           </argument>
         </arguments>
@@ -401,23 +401,29 @@ x=xprevious
             <kind>1</kind>
             <string>if client=true
 {
+    if ghost=true
+    {
+    image_alpha=.25
+    image_blend=c_silver
+    draw_set_alpha(image_alpha)
+    }
     draw_set_halign(fa_center)
     if ms &lt;= 0
     {
         draw_self()
         if image_xscale = 1
-            draw_sprite_ext(gun,0,x,y+23,1,1,aimAngle,c_white,1)
+            draw_sprite_ext(gun,0,x,y+23,1,1,aimAngle,image_blend,image_alpha)
         else
-            draw_sprite_ext(gun,0,x,y+23,-1,1,aimAngle,c_white,1)
+            draw_sprite_ext(gun,0,x,y+23,-1,1,aimAngle,image_blend,image_alpha)
         draw_text(x,y-25,PlayerName)
     }
     else
     {
         draw_sprite_ext(sprite_index,image_index,mx + x,my + y,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
         if image_xscale = 1
-            draw_sprite_ext(gun,0,mx + x,my + y + 23,1,1,aimAngle,c_white,1)
+            draw_sprite_ext(gun,0,mx + x,my + y + 23,1,1,aimAngle,image_blend,image_alpha)
         else
-            draw_sprite_ext(gun,0,mx + x,my + y + 23,-1,1,aimAngle,c_white,1)
+            draw_sprite_ext(gun,0,mx + x,my + y + 23,-1,1,aimAngle,image_blend,image_alpha)
         draw_text(mx + x,my + y-25,PlayerName)
         if distance_to_point(x+mx,y+my)&lt;=ms
             ms = 0
@@ -425,11 +431,14 @@ x=xprevious
         mx += lengthdir_x(ms,mdir)
         my += lengthdir_y(ms,mdir)
     }
-    if laser_sight=true
+    if laser_sight=true and ghost=false
     {
         DrawLaserSight()
     }
     draw_set_halign(fa_left)
+    image_alpha=1
+    image_blend=c_white
+    draw_set_alpha(1)
 }
 else
 draw_rectangle_color(bbox_left,bbox_top,bbox_right,bbox_bottom,c_red,c_red,c_red,c_red,true)

@@ -71,6 +71,7 @@
       <script>scripts\SendChatMessage.gml</script>
       <script>scripts\SendBullet.gml</script>
     </scripts>
+    <script>scripts\startGame.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>
@@ -100,6 +101,8 @@
     <object>objects\oCharacterSelect</object>
     <object>objects\oCongratsText</object>
     <object>objects\oRainbowEffect</object>
+    <object>objects\oLabel</object>
+    <object>objects\oCountDownLabel</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Menu</room>
@@ -122,8 +125,8 @@
     <constant name="GUN_ANGLE_CMD">7</constant>
     <constant name="ADD_BULLET">8</constant>
     <constant name="FIRST_SYNC_CMD">9</constant>
-    <constant name="GM_version">'1.0.0.2'</constant>
-    <constant name="GM_build_date">41911.0573055787</constant>
+    <constant name="GM_version">'1.0.0.1'</constant>
+    <constant name="GM_build_date">41912.6233942245</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
