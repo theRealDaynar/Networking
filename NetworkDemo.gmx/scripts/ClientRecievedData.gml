@@ -54,7 +54,10 @@
                 }
                 }
                 else
+                {
                 var olddeaths=newdeaths-1;
+                inst=id
+                }
                 inst.x = buffer_read(buff, buffer_s16)
                 inst.y = buffer_read(buff, buffer_s16)
                 if olddeaths=newdeaths
@@ -97,8 +100,12 @@
                 inst.recoilDirection = buffer_read(buff, buffer_s16)
                 var lostSteps = floor((current_time-timeInThePast)/(1000/room_speed));
                 if servertime=0
-                for(ii = 0;ii<lostSteps;ii++)
-                    event_perform_object(inst,ev_step,ev_step_normal)
+                {
+                    if inst.image_speed=1
+                        event_perform_object(inst,ev_create,ev_create)
+                    for(ii = 0;ii<lostSteps;ii++)
+                        event_perform_object(inst,ev_step,ev_step_normal)
+                }
             }
             var uBulletNum = buffer_read(buff, buffer_u8)
             if uBulletNum = 0

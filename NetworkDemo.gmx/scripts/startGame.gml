@@ -12,7 +12,7 @@ for(var i=0;i<global.PlayerTotal;i++)
                 y=random(room_height)
             }
             ghost=false
-            deaths=0
+            //deaths=0
             with(oServerProjectile)
                 instance_destroy()
         }

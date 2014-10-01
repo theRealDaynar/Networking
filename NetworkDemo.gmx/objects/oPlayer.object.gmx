@@ -96,7 +96,9 @@ ghost = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>  /// Process the player (move+collision)
+            <string>if !instance_exists(oCountDownLabel)
+{
+    /// Process the player (move+collision)
 var xx,yy,c1,c2;
 if recoilSpeed&gt;0
 {
@@ -335,6 +337,15 @@ if(( keys[LEFT_KEY] ) and disableInput=false) or (shooting=false and keys[LEFT_K
         }//*/
 //    }
 }
+if ms&gt;0
+{
+    if distance_to_point(x+mx,y+my)&lt;=ms
+        ms = 0
+    var mdir = point_direction(mx + x,my + y,x,y);
+    mx += lengthdir_x(ms,mdir)
+    my += lengthdir_y(ms,mdir)
+}
+}
 </string>
           </argument>
         </arguments>
@@ -425,11 +436,6 @@ x=xprevious
         else
             draw_sprite_ext(gun,0,mx + x,my + y + 23,-1,1,aimAngle,image_blend,image_alpha)
         draw_text(mx + x,my + y-25,PlayerName)
-        if distance_to_point(x+mx,y+my)&lt;=ms
-            ms = 0
-        var mdir = point_direction(mx + x,my + y,x,y);
-        mx += lengthdir_x(ms,mdir)
-        my += lengthdir_y(ms,mdir)
     }
     if laser_sight=true and ghost=false
     {

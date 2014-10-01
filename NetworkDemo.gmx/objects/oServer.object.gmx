@@ -264,7 +264,10 @@ draw_text(10,70,"fps: "+string(fps) );
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>startGame()
+            <string>if playing=false
+{
+    startGame()
+}
 </string>
           </argument>
         </arguments>
