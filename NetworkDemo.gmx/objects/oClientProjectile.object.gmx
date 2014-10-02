@@ -131,7 +131,7 @@ image_angle=direction
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*x=xprevious
+            <string>x=xprevious
 y=yprevious
 hspeed=-hspeed
 vspeed=-vspeed
