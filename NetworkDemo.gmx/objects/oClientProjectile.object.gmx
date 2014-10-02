@@ -98,7 +98,7 @@ instance_create(x-16,y-16,oPuff)
           <argument>
             <kind>1</kind>
             <string>var colInst = instance_position(x, y, oPlayer)
-if GetCollision(x,y)!=-1 or (colInst!=noone and colInst.id!=owner and colInst.client=true)
+if GetCollision(x,y)!=-1 or (colInst!=noone and colInst.id!=owner and colInst.client=true and colInst.ghost=false)
 instance_destroy()
 
 if GetCollision(x+hspeed,y)!=-1 {hspeed=-hspeed}
@@ -109,6 +109,32 @@ hspeed=-hspeed
 vspeed=-vspeed
 }
 image_angle=direction
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="oClientProjectile">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/*x=xprevious
+y=yprevious
+hspeed=-hspeed
+vspeed=-vspeed
 </string>
           </argument>
         </arguments>

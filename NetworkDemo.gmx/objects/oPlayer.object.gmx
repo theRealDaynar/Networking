@@ -65,6 +65,8 @@ chargeUp=0          //ticker for chargeUpTime
 recoil=0            //recoil amount STATIC defined by gun
 recoilSpeed=0       //recoil speed used to actually move the player
 recoilDirection=0   //direction recoiled
+bulletOffset=0      //how much above or below the barrel
+shootingScript=DoNothing
 
 mx=0
 my=0

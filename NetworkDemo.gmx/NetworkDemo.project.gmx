@@ -72,6 +72,8 @@
       <script>scripts\SendBullet.gml</script>
     </scripts>
     <script>scripts\startGame.gml</script>
+    <script>scripts\DoNothing.gml</script>
+    <script>scripts\BulletHexagon.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>
@@ -125,8 +127,8 @@
     <constant name="GUN_ANGLE_CMD">7</constant>
     <constant name="ADD_BULLET">8</constant>
     <constant name="FIRST_SYNC_CMD">9</constant>
-    <constant name="GM_version">'1.0.0.3'</constant>
-    <constant name="GM_build_date">41913.1023465046</constant>
+    <constant name="GM_version">'1.0.0.1'</constant>
+    <constant name="GM_build_date">41914.6824874769</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

@@ -6,7 +6,7 @@
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>Bullet</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -113,10 +113,10 @@ instance_create(x-16,y-16,oPuff)
           <argument>
             <kind>1</kind>
             <string>var colInst = instance_position(x, y, oPlayer)
-if GetCollision(x,y)!=-1 or (colInst!=noone and colInst.id!=owner and colInst.client=false)
+if GetCollision(x,y)!=-1 or (colInst!=noone and colInst.id!=owner and colInst.client=false and colInst.ghost=false)
 {
     instance_destroy()
-    if colInst!=noone and colInst.client=false and colInst.ghost = false
+    if colInst!=noone and colInst.id!=owner and colInst.client=false and colInst.ghost=false
     {
         colInst.deaths++
         if oServer.playing = true
@@ -132,12 +132,14 @@ if GetCollision(x,y)!=-1 or (colInst!=noone and colInst.id!=owner and colInst.cl
                 }
             }    
             if ghostCount&lt;2
-                oServer.playing=false
-            with(oPlayer)
             {
-                if client=false
+                oServer.playing=false
+                with(oPlayer)
                 {
-                    ghost=false
+                    if client=false
+                    {
+                        ghost=false
+                    }
                 }
             }
         }
@@ -155,8 +157,6 @@ if GetCollision(x,y)!=-1 or (colInst!=noone and colInst.id!=owner and colInst.cl
             ghost=false
         }
         }
-        with(oServerProjectile)
-            instance_destroy()
     }
 }
 if GetCollision(x+hspeed,y)!=-1 {hspeed=-hspeed}
@@ -166,6 +166,32 @@ if GetCollision(x+hspeed,y+vspeed)!=-1
 hspeed=-hspeed
 vspeed=-vspeed
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="oServerProjectile">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/*x=xprevious
+y=yprevious
+hspeed=-hspeed
+vspeed=-vspeed
 </string>
           </argument>
         </arguments>
