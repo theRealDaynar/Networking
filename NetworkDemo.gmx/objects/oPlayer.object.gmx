@@ -67,6 +67,7 @@ recoilSpeed=0       //recoil speed used to actually move the player
 recoilDirection=0   //direction recoiled
 bulletOffset=0      //how much above or below the barrel
 shootingScript=DoNothing
+justShot=false
 
 mx=0
 my=0
@@ -98,7 +99,8 @@ ghost = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if !instance_exists(oCountDownLabel)
+            <string>justShot=false
+if !instance_exists(oCountDownLabel)
 {
     /// Process the player (move+collision)
 var xx,yy,c1,c2;
@@ -303,7 +305,7 @@ if(( keys[LEFT_KEY] ) and disableInput=false) or (shooting=false and keys[LEFT_K
     //image_xscale = 1;
 }
 //if client=false{
-    if (keys[MB_LEFT]=true or shooting=true) and rofcd&lt;=0 and ghost=false
+    if (keys[MB_LEFT]=true or shooting=true) and rofcd&lt;=0 and ghost=false and (disableInput=false or (-1!=GetCollision(bbox_left,bbox_bottom+1) or -1!=GetCollision(bbox_right,bbox_bottom+1)) )
     {
         FireGun()
     }

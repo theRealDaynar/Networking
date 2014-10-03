@@ -38,7 +38,7 @@ if chargeUpTime<=chargeUp
         recoilSpeed = recoil
         recoilDirection = -aimAngle + aimMode
     }
-    if bulletStringN<bulletString
+    if bulletStringN<bulletString-1
     {
         rofcd = bulletStringCD
         bulletStringN++
@@ -46,6 +46,7 @@ if chargeUpTime<=chargeUp
     else
     {
         shooting=false
+        justShot=true
         bulletStringN=0
         rofcd = rof
     }

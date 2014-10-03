@@ -148,7 +148,7 @@ alarm[0]=120;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if oMX!=mouse_x or oMY!=mouse_y
+            <string>if (oMX!=mouse_x or oMY!=mouse_y) and (ClientPlayer.disableInput=false or (ClientPlayer.shooting=false and ClientPlayer.justShot=false))
 {
     with(ClientPlayer)
     {
