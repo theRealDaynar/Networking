@@ -149,7 +149,7 @@ if GetCollision(x,y)!=-1 or (colInst!=noone and colInst.id!=owner and colInst.cl
         {
             x=random(room_width)
             y=random(room_height)
-            while(GetCollision(x,y)!=-1)
+            while(GetCollision(x,y+8)!=-1)
             {
                 x=random(room_width)
                 y=random(room_height)

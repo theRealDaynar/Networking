@@ -15,7 +15,7 @@
         global.PlayerTotal++;
         // add client to our list of connected clients
         ds_list_add( socketlist, sock );
-
+        ds_list_add( iplist, ip);
         // Create a new player, and pick a random colour for that player        
         var inst = instance_create(64,192, oPlayer);
         //randomize()

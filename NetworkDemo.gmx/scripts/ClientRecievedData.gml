@@ -109,8 +109,25 @@
             }
             var uBulletNum = buffer_read(buff, buffer_u8)
             if uBulletNum = 0
+            {
                 with(oClientProjectile)
                     instance_destroy()
+                audio_sound_gain(bgm2i,0,0)
+                audio_sound_gain(bgm3i,0,0)
+            }
+            else
+            {
+                if uBulletNum<50
+                {
+                    audio_sound_gain(bgm2i,uBulletNum/50,0)
+                    audio_sound_gain(bgm3i,0,0)
+                }
+                else
+                {
+                    audio_sound_gain(bgm2i,1,0)
+                    audio_sound_gain(bgm3i,(uBulletNum-50)/50,0)
+                }
+            }
             for(i = 0; i<uBulletNum;i++)
             {
                 inst = instance_find(oClientProjectile, i)
