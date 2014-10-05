@@ -109,6 +109,7 @@
     <object>objects\oRainbowEffect</object>
     <object>objects\oLabel</object>
     <object>objects\oCountDownLabel</object>
+    <object>objects\oCountDownLabel2</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Menu</room>
@@ -132,7 +133,7 @@
     <constant name="ADD_BULLET">8</constant>
     <constant name="FIRST_SYNC_CMD">9</constant>
     <constant name="GM_version">'1.0.0.1'</constant>
-    <constant name="GM_build_date">41916.8980431829</constant>
+    <constant name="GM_build_date">41917.1418220255</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

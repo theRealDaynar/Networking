@@ -105,8 +105,8 @@ if GetCollision(x+hspeed,y)!=-1 {hspeed=-hspeed}
 if GetCollision(x,y+vspeed)!=-1 {vspeed=-vspeed}
 if GetCollision(x+hspeed,y+vspeed)!=-1
 {
-hspeed=-hspeed
-vspeed=-vspeed
+    hspeed=-hspeed
+    vspeed=-vspeed
 }
 image_angle=direction
 </string>

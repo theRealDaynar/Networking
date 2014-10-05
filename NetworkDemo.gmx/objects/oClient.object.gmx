@@ -83,6 +83,8 @@ audio_sound_gain(bgm2i,0,0)
 audio_play_sound(bgm2i,1,1)
 audio_sound_gain(bgm3i,0,0)
 audio_play_sound(bgm3i,1,1)
+playing=false
+pause=false
 </string>
           </argument>
         </arguments>
@@ -157,7 +159,8 @@ alarm[0]=120;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (oMX!=mouse_x or oMY!=mouse_y) and (ClientPlayer.disableInput=false or (ClientPlayer.shooting=false and ClientPlayer.justShot=false))
+            <string>
+if ClientPlayer!=id  and (oMX!=mouse_x or oMY!=mouse_y) and (ClientPlayer.disableInput=false or (ClientPlayer.shooting=false and ClientPlayer.justShot=false))
 {
     with(ClientPlayer)
     {

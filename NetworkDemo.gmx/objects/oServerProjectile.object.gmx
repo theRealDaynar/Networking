@@ -122,25 +122,21 @@ if GetCollision(x,y)!=-1 or (colInst!=noone and colInst.id!=owner and colInst.cl
         if oServer.playing = true
         {
             colInst.ghost = true
-            ghostCount=0
+            var ghostCount=0
             with(oPlayer)
             {
                 if client=false
                 {
-                    if ghost = false
-                    other.ghostCount++
+                    if ghost = true
+                    ghostCount++
                 }
             }    
-            if ghostCount&lt;2
+            if ghostCount = global.PlayerTotal - 1
             {
-                oServer.playing=false
-                with(oPlayer)
-                {
-                    if client=false
-                    {
-                        ghost=false
-                    }
-                }
+                oServer.alarm[2]=room_speed*5
+            }else if ghostCount &gt; global.PlayerTotal - 1
+            {
+                oServer.alarm[2]=1
             }
         }
         else
@@ -154,6 +150,8 @@ if GetCollision(x,y)!=-1 or (colInst!=noone and colInst.id!=owner and colInst.cl
                 x=random(room_width)
                 y=random(room_height)
             }
+            with(oServerProjectile)
+                instance_destroy()
             ghost=false
         }
         }
