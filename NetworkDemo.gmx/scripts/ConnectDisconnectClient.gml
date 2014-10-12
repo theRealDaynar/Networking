@@ -8,6 +8,7 @@
     
     // Get the IP that the socket comes from
     var ip = ds_map_find_value(async_load, "ip");
+    var port = ds_map_find_value(async_load, "port");
     
     // Connecting?
     if( t==network_type_connect)
@@ -16,6 +17,7 @@
         // add client to our list of connected clients
         ds_list_add( socketlist, sock );
         ds_list_add( iplist, ip);
+        ds_list_add( portlist, port);
         // Create a new player, and pick a random colour for that player        
         var inst = instance_create(64,192, oPlayer);
         //randomize()

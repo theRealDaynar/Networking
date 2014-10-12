@@ -35,23 +35,37 @@
             network_send_packet( client, pingS, buffer_get_size(pingS) );
             buffer_delete(pingS)
             //update information on player characters
+            var oldPlaying = playing;
+            playing = buffer_read(buff, buffer_bool)
+            if oldPlaying = false and playing = true
+            {
+                alarm[3]=room_speed*5
+            }
+            pause = buffer_read(buff, buffer_bool)
             var uPlayerNum = buffer_read(buff, buffer_u8)
             for(var i = 0; i<uPlayerNum;i++)
             {
-                var truisnt = buffer_read(buff, buffer_u32)
+                var truisnt = buffer_read(buff, buffer_u32);
                 var inst = ds_list_find_value(global.ClientInstances,ds_list_find_index(global.ServerInstances,truisnt));
-                var newdeaths = buffer_read(buff, buffer_u8)
+                var newWins = buffer_read(buff, buffer_u8);
+                var newdeaths = buffer_read(buff, buffer_u8);
                 if inst!=0
                 {
-                    var olddeaths = inst.deaths ;
-                    inst.deaths=newdeaths
+                    var olddeaths = inst.deaths;
+                    var oldWins = inst.wins;
+                    inst.wins = newWins
+                    if newWins>oldWins
+                    {
+                        (instance_create(room_width/2,room_height/2,oCongratsText)).text1=inst.PlayerName+" has won!"
+                    }
+                    inst.deaths = newdeaths
                     if newdeaths>olddeaths
-                                    {
-                (instance_create(room_width/2,room_height/2,oCongratsText)).text1=inst.PlayerName+" has been slain!"
-                with(inst)
-                    for(var ii; i<5;i++)
-                        instance_create(bbox_left+random(bbox_right-bbox_left),bbox_top+random(bbox_bottom-bbox_top),oPuff)
-                }
+                    {
+                        (instance_create(room_width/2,room_height/2,oCongratsText)).text1=inst.PlayerName+" has been slain!"
+                        with(inst)
+                            for(var ii; i<5;i++)
+                                instance_create(bbox_left+random(bbox_right-bbox_left),bbox_top+random(bbox_bottom-bbox_top),oPuff)
+                    }
                 }
                 else
                 {
@@ -84,7 +98,7 @@
                 {
                         inst.keys[ii] = buffer_read(buff, buffer_bool)
                 }
-                inst.ghost=buffer_read(buff, buffer_bool)
+                inst.ghost = buffer_read(buff, buffer_bool)
                 inst.aimX = buffer_read(buff, buffer_s16)
                 inst.aimY = buffer_read(buff, buffer_s16)
                 if inst!=ClientPlayer
@@ -112,20 +126,23 @@
             {
                 with(oClientProjectile)
                     instance_destroy()
+                audio_sound_gain(bgm1i,1,1)
                 audio_sound_gain(bgm2i,0,0)
                 audio_sound_gain(bgm3i,0,0)
             }
             else
             {
-                if uBulletNum<50
+                if uBulletNum<100
                 {
-                    audio_sound_gain(bgm2i,uBulletNum/50,0)
+                    audio_sound_gain(bgm1i,(100-uBulletNum)/100,0)
+                    audio_sound_gain(bgm2i,uBulletNum/100,0)
                     audio_sound_gain(bgm3i,0,0)
                 }
                 else
                 {
-                    audio_sound_gain(bgm2i,1,0)
-                    audio_sound_gain(bgm3i,(uBulletNum-50)/50,0)
+                    audio_sound_gain(bgm2i,(100-(uBulletNum-100))/100,0)
+                    audio_sound_gain(bgm1i,0,0)
+                    audio_sound_gain(bgm3i,(uBulletNum-100)/100,0)
                 }
             }
             for(i = 0; i<uBulletNum;i++)
@@ -149,6 +166,26 @@
                 with(instance_find(oClientProjectile,i++))
                     instance_destroy()
             }
+            
+                var ghostNum = 0
+                var playerNum = 0
+                with(oPlayer)
+                {
+                    if client = true
+                    {
+                        if ghost = true
+                            ghostNum++
+                        playerNum++
+                    }
+                }
+                if ghostNum = playerNum - 1 and !instance_exists(oCountDownLabel) and playing = true
+                    instance_create(room_width/2,room_height/3,oCountDownLabel)
+                else if ghostNum = 0 and instance_exists(oCountDownLabel) and playing = false and oldPlaying = true
+                {
+                    (instance_create(room_width/2,room_height/2,oCongratsText)).text1="No one wins!"
+                    with(oCountDownLabel)
+                        instance_destroy()
+                }
             servertime=newServertime
             clienttime=newClienttime
         }

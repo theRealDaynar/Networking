@@ -72,7 +72,7 @@ justShot=false
 mx=0
 my=0
 ms=0
-kills = 0
+wins = 0
 deaths = 0
 hp = 10
 showScoreBoard = 0
@@ -100,7 +100,7 @@ ghost = false
           <argument>
             <kind>1</kind>
             <string>justShot=false
-if !instance_exists(oCountDownLabel)
+if (client=true and oClient.pause=false) or (client=false and oServer.pause=false)
 {
     /// Process the player (move+collision)
 var xx,yy,c1,c2;

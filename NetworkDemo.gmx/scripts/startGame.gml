@@ -12,13 +12,15 @@ for(var i=0;i<global.PlayerTotal;i++)
                 y=random(room_height)
             }
             ghost=false
-            //deaths=0
             with(oServerProjectile)
                 instance_destroy()
         }
     }
 }
 playing = true
+alarm[3]=room_speed*5
+pause=true
+/*
 global.pBuffer = buffer_create(1, buffer_grow, 1)
 buffer_write(global.pBuffer, buffer_s16, 13);
 var count = ds_list_size(socketlist);

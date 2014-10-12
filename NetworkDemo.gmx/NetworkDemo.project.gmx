@@ -111,6 +111,7 @@
     <object>objects\oRainbowEffect</object>
     <object>objects\oLabel</object>
     <object>objects\oCountDownLabel</object>
+    <object>objects\oCountDownLabel2</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Menu</room>
@@ -133,8 +134,13 @@
     <constant name="GUN_ANGLE_CMD">7</constant>
     <constant name="ADD_BULLET">8</constant>
     <constant name="FIRST_SYNC_CMD">9</constant>
+<<<<<<< HEAD
     <constant name="GM_version">'1.0.0.1'</constant>
     <constant name="GM_build_date">41924.126698831</constant>
+=======
+    <constant name="GM_version">'1.0.0.2'</constant>
+    <constant name="GM_build_date">41917.1543518519</constant>
+>>>>>>> origin/master
   </constants>
   <help>
     <rtf>help.rtf</rtf>
