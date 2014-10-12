@@ -8,7 +8,7 @@
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
   <bbox_left>3</bbox_left>
-  <bbox_right>35</bbox_right>
+  <bbox_right>38</bbox_right>
   <bbox_top>1</bbox_top>
   <bbox_bottom>35</bbox_bottom>
   <HTile>0</HTile>
@@ -25,5 +25,6 @@
     <frame index="2">images\sCharacters_2.png</frame>
     <frame index="3">images\sCharacters_3.png</frame>
     <frame index="4">images\sCharacters_4.png</frame>
+    <frame index="5">images\sCharacters_5.png</frame>
   </frames>
 </sprite>

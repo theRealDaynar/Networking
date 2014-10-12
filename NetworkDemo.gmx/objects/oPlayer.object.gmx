@@ -206,7 +206,7 @@ if recoilSpeed&gt;0
         }
     recoilSpeed-=.5
 }
-/// Do payer "jump"
+/// Do player "jump"
 if( jump &lt; 2 ) 
 {
     if ((( keys[JUMP_KEY] ) and disableInput=false) or (shooting=false and keys[JUMP_KEY])){

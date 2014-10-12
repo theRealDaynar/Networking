@@ -49,7 +49,7 @@
           <argument>
             <kind>1</kind>
             <string>draw_rectangle_color(60*(global.s+1)-21,195,60*(global.s+1)+20,235,c_yellow,c_yellow,c_yellow,c_yellow,false)
-for(var i=0;i&lt;5;i++)
+for(var i=0;i&lt;6;i++)
 {
     draw_sprite(sCharacters,i,60*(i+1),200)
     if mouse_y &gt; 195 and mouse_y &lt; 235 and mouse_x&gt;60*(i+1)-20 and mouse_x&lt;60*(i+1)+20

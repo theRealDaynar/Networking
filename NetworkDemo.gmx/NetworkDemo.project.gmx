@@ -39,6 +39,8 @@
       <sprite>sprites\bulletthrower</sprite>
       <sprite>sprites\Bullet</sprite>
       <sprite>sprites\Grenade</sprite>
+      <sprite>sprites\pistol</sprite>
+      <sprite>sprites\grenadelauncher</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -132,7 +134,7 @@
     <constant name="ADD_BULLET">8</constant>
     <constant name="FIRST_SYNC_CMD">9</constant>
     <constant name="GM_version">'1.0.0.1'</constant>
-    <constant name="GM_build_date">41916.8980431829</constant>
+    <constant name="GM_build_date">41924.126698831</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
